@@ -20,12 +20,13 @@ import com.jfinal.club.common.account.AccountService;
 import com.jfinal.club.common.controller.BaseController;
 import com.jfinal.club.common.model.Account;
 
-/**
+/**灭有
  * UserSpaceInterceptor 用户空间拦截器
  */
 public class UserSpaceInterceptor implements Interceptor {
 
     public void intercept(Invocation inv) {
+    	
         BaseController c = (BaseController)inv.getController();
 
         // 如果登录用户进入的用户空间是自己的空间，则重定向到 /my/xxx
