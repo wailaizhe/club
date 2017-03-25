@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true">
+
+    <diskStore path="java.io.tmpdir"/>
+
+	<!--
+	Default Cache configuration. These settings will be applied to caches
+	created programmatically using CacheManager.add(String cacheName).
+	This element is optional, and using CacheManager.add(String cacheName) when
+	its not present will throw CacheException
+
+	The defaultCache has an implicit name "default" which is a reserved cache name.
+	-->
+	<defaultCache
+			maxEntriesLocalHeap="10000"
+			eternal="false"
+			timeToIdleSeconds="120"
+			timeToLiveSeconds="120"
+
+			diskSpoolBufferSizeMB="30"
+			maxEntriesLocalDisk="10000000"
+			diskExpiryThreadIntervalSeconds="120"
+			memoryStoreEvictionPolicy="LRU"
+			statistics="false">
+		<persistence strategy="localTempSwap"/>
+	</defaultCache>
+    
+    <!--Predefined caches.  Add your cache configuration settings here.
+        If you do not have a configuration for your cache a WARNING will be issued when the
+        CacheManager starts
+
+        The following attributes are required for defaultCache:
+
+        name              - Sets the name of the cache. This is used to identify the cache. It must be unique.
+        maxInMemory       - Sets the maximum number of objects that will be created in memory
+        eternal           - Sets whether elements are eternal. If eternal,  timeouts are ignored and the element
+                            is never expired.
+        timeToIdleSeconds - Sets the time to idle for an element before it expires. Is only used
+                            if the element is not eternal. Idle time is now - last accessed time
+        timeToLiveSeconds - Sets the time to live for an element before it expires. Is only used
+                            if the element is not eternal. TTL is now - creation time
+        overflowToDisk    - Sets whether elements can overflow to disk when the in-memory cache
+                            has reached the maxInMemory limit.
+
+        -->
+    
+    <!-- 缓存登录用户信息，空闲 30 分钟则清除，否则一直保持登录状态，
+        登录过期时间是指 session表中的 expireAt，此缓存仅用于统计 login_log
+        以及提升性能(不必总读取数据库 session 表) -->
+    <cache name="loginAccount"
+           maxEntriesLocalHeap="90000"
+           eternal="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+            />
+
+	<!-- allAccounts 所有账号缓存，用于其它 model join 到 nickName、avatar -->
+	<cache name="allAccounts"
+	       maxEntriesLocalHeap="90000"
+	       eternal="true"
+	       overflowToDisk="false"
+			/>
+
+	<!-- weixinPayResendNotify 用于防止微信支付异步通知重发造成的数据重复处理，在WeixinPayService中使用 -->
+	<cache name="weixinPayResendNotify"
+	       maxEntriesLocalHeap="3000"
+	       eternal="false"
+	       timeToIdleSeconds="3600"
+	       timeToLiveSeconds="0"
+	       overflowToDisk="false"
+			/>
+
+	<!-- newsFeedPage 缓存 -->
+	<cache name="newsFeedPage"
+	       maxEntriesLocalHeap="90000"
+	       eternal="true"
+	       overflowToDisk="false"
+			/>
+
+	<!-- referMePage 缓存，空闲时间允许一个小时 3600 秒 -->
+	<cache name="referMePage"
+	       maxEntriesLocalHeap="3000"
+	       eternal="false"
+	       timeToIdleSeconds="3600"
+	       timeToLiveSeconds="0"
+	       overflowToDisk="false"
+			/>
+
+	<!-- remind 缓存，空闲时间允许一个小时 3600 秒 -->
+	<cache name="remind"
+	       maxEntriesLocalHeap="3000"
+	       eternal="false"
+	       timeToIdleSeconds="3600"
+	       timeToLiveSeconds="0"
+	       overflowToDisk="false"
+			/>
+
+	<!-- pageViewIp 的 key 生成规则为 actionKey + ip，例如：
+	        1："/project" + ip
+	        2："/share" + ip
+	        3："/feedback" + ip
+	        用于得到当前 ip 所对应的具体的文章的 id，为了避免恶意刷排名，
+	        当 id 不存在时才进行 visitCount 的记数更新
+	         xxx_page_view 的 visitCount  字段用于对文章进行排序 -->
+	<cache name="pageViewIp"
+	       maxEntriesLocalHeap="90000"
+	       eternal="false"
+	       timeToIdleSeconds="60"
+	       timeToLiveSeconds="60"
+	       overflowToDisk="false"
+	       diskPersistent="false"
+			/>
+	<cache name="projectPageView"
+	       maxEntriesLocalHeap="90000"
+	       eternal="true"
+	       overflowToDisk="true"
+	       diskPersistent="true"
+			/>
+	<cache name="sharePageView"
+	       maxEntriesLocalHeap="90000"
+	       eternal="true"
+	       overflowToDisk="true"
+	       diskPersistent="true"
+			/>
+	<cache name="feedbackPageView"
+	       maxEntriesLocalHeap="90000"
+	       eternal="true"
+	       overflowToDisk="true"
+	       diskPersistent="true"
+			/>
+
+    <!-- 首页缓存 -->
+    <cache name="index"
+           maxEntriesLocalHeap="300"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false"
+            />
+
+	<!-- 文档缓存 -->
+	<cache name="doc"
+	       maxEntriesLocalHeap="300"
+	       eternal="false"
+	       timeToIdleSeconds="3600"
+	       timeToLiveSeconds="3600"
+	       overflowToDisk="false"
+			/>
+     
+     <!-- 捐助列表页缓存 -->
+     <cache name="donate"
+           maxEntriesLocalHeap="5000"
+           maxEntriesLocalDisk="1000"
+           eternal="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           overflowToDisk="true"
+            />
+
+	<!-- 下载文件缓存 -->
+	<cache name="download"
+	       maxEntriesLocalHeap="500"
+	       eternal="true"
+	       timeToIdleSeconds="0"
+	       timeToLiveSeconds="0"
+	       overflowToDisk="true"
+			/>
+
+	<!-- 热门项目 -->
+	<cache name="hotProject"
+	       maxEntriesLocalHeap="50"
+	       eternal="false"
+	       timeToIdleSeconds="600"
+	       timeToLiveSeconds="600"
+	       overflowToDisk="false"
+			/>
+	<!-- 热门分享 -->
+	<cache name="hotShare"
+	       maxEntriesLocalHeap="50"
+	       eternal="false"
+	       timeToIdleSeconds="600"
+	       timeToLiveSeconds="600"
+	       overflowToDisk="false"
+			/>
+	<!-- 热门反馈 -->
+	<cache name="hotFeedback"
+	       maxEntriesLocalHeap="50"
+	       eternal="false"
+	       timeToIdleSeconds="600"
+	       timeToLiveSeconds="600"
+	       overflowToDisk="false"
+			/>
+
+
+<!--  以下是三个 sample cache，仅作配置参考 ============================================  -->
+	<!--
+	Sample caches. Following are some example caches. Remove these before use.
+	-->
+
+	<!--
+	Sample cache named sampleCache1
+	This cache contains a maximum in memory of 10000 elements, and will expire
+	an element if it is idle for more than 5 minutes and lives for more than
+	10 minutes.
+
+	If there are more than 10000 elements it will overflow to the
+	disk cache, which in this configuration will go to wherever java.io.tmp is
+	defined on your system. On a standard Linux system this will be /tmp"
+	-->
+	<cache name="sampleCache1"
+	       maxEntriesLocalHeap="10000"
+	       maxEntriesLocalDisk="1000"
+	       eternal="false"
+	       diskSpoolBufferSizeMB="20"
+	       timeToIdleSeconds="300"
+	       timeToLiveSeconds="600"
+	       memoryStoreEvictionPolicy="LFU"
+	       transactionalMode="off">
+		<persistence strategy="localTempSwap"/>
+	</cache>
+
+	<!--
+	Sample cache named sampleCache2
+	This cache has a maximum of 1000 elements in memory. There is no overflow to disk, so 1000
+	is also the maximum cache size. Note that when a cache is eternal, timeToLive and
+	timeToIdle are not used and do not need to be specified.
+	-->
+	<cache name="sampleCache2"
+	       maxEntriesLocalHeap="1000"
+	       eternal="true"
+	       memoryStoreEvictionPolicy="FIFO"
+			/>
+
+	<!--
+	Sample cache named sampleCache3. This cache overflows to disk. The disk store is
+	persistent between cache and VM restarts. The disk expiry thread interval is set to 10
+	minutes, overriding the default of 2 minutes.
+	-->
+	<cache name="sampleCache3"
+	       maxEntriesLocalHeap="500"
+	       eternal="false"
+	       overflowToDisk="true"
+	       diskPersistent="true"
+	       timeToIdleSeconds="300"
+	       timeToLiveSeconds="600"
+	       diskExpiryThreadIntervalSeconds="1"
+	       memoryStoreEvictionPolicy="LFU">
+	</cache>
+</ehcache>

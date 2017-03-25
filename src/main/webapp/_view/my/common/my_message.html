@@ -1,0 +1,53 @@
+#set(seoTitle="JFinal 我的空间")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/my/common/_my_space_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-my-panel-box jf-pull-right">
+
+	<!-- 项目 -->
+	<div class="jf-my-panel">
+		<h2 class="jf-my-panel-name"><a href="/project">分享</a></h2>
+		<ul class="jf-my-panel-list">
+			<#list 1..2 as x>
+				<li>
+					<div class="jf-panel-img">
+						<img src="/assets/img/user_test.jpg">
+					</div>
+					<div class="jf-panel-item">
+						<h3><a href="/project/1">分享JFinal实战</a></h3>
+						<p>中文JFinal 是基于 Java 语言的极速 WEB + ORM 框架，其核心设计目标是
+							开发迅速、代码量少、学习简单、功能强大、轻量级、易扩展、Restful。
+							在拥有Java语言所有优势的同时再拥有ruby、python、php等动态语言的
+							开发效率！为您节约更多时间，去陪恋人、家人和朋友 :)
+						</p>
+					</div>
+				</li>
+			</#list>
+		</ul>
+		<ul class="jf-paginate">
+			<li class="pre-page"><a href="/project?page=1">&lt;</a></li>
+			<li><a href="/project?page=1">1</a></li>
+			<li><a href="/project?page=2">2</a></li>
+			<li><a href="/project?page=3">3</a></li>
+			<li class="current"><a href="javascript:;">4</a></li>
+			<li><a href="/project?page=3">5</a></li>
+			<li><a href="/project?page=4">6</a></li>
+			<li><a href="/project?page=5">7</a></li>
+			<li class="next-page" ><a href="/project?page=3">&gt;</a></li>
+		</ul>
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript">
+		// 选中左侧菜单项
+		$(document).ready(function() {
+		setCurrentMyMenu();
+		});
+	</script>
+#end

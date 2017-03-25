@@ -1,0 +1,40 @@
+<script type="text/javascript" src="/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/assets/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+	// 加载 ueditor
+	var ue = UE.getEditor('container', {
+		initialFrameWidth:750
+		,initialFrameHeight:300
+		,wordCount:false
+
+		// 个人空间在 ueditor.config.js 的配置如下，需要覆盖掉，document 模块的字体与行间距总体要小一些
+		// ,initialStyle:'p{font-size: 18px; font-family:微软雅黑; margin:0 0 22px 0;} li p{margin:0;line-height:30px;} pre{font-family: Consolas, Monaco, \'Courier New\', \'Microsoft Yahei\', 微软雅黑;font-size: 16px;line-height: 20px;}'
+		   ,initialStyle:'p{font-size: 16px; font-family:微软雅黑; margin:0 0 10px 0;} li p{margin:0;line-height:28px;} pre{font-family: Consolas, Monaco, \'Courier New\', \'Microsoft Yahei\', 微软雅黑;font-size: 16px;line-height: 20px;}'
+
+	});
+
+	// 由于ctrl+回车提交表单会让ajax form失效，所以让该快捷键失效
+	// $(document).ready(function() {ue.shortcutkeys["autosubmit"] = "";});
+	// 另一种让该表单提交快捷键失效的方法，注册同名plugin覆盖掉旧的，这种方式更加简单可靠
+	UE.plugin.register('autosubmit',function(){});
+
+	UE.plugin.register('jfajaxsubmit',function(){
+		return {
+			shortcutkey:{
+				"jfajaxsubmit":"ctrl+13" // ctrl + 回车 提交表单
+			},
+			commands:{
+				'jfajaxsubmit':{
+					execCommand:function () {
+						var me=this;
+						if(me.fireEvent("beforesubmit")===false){
+							return;
+						}
+						me.sync();
+						$("#myArticleForm").submit();
+					}
+				}
+			}
+		}
+	});
+</script>

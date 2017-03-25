@@ -1,0 +1,33 @@
+#set(seoTitle=user.nickName + "的动态消息")
+#@layout()
+#define main()
+<!-- 用户空间左侧菜单栏 -->
+#include("/_view/user/common/_user_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 动态消息 -->
+	<div class="jf-my-panel">
+		<ul class="newsfeed-tabs clearfix">
+			<li><a class="current" href="/user/#{user.id}">动态</a></li>
+			### <li class="refer-me"><a href="/user/referMe/id">@提到我</a></li>
+		</ul>
+
+		#include("/_view/my/newsfeed/_news_feed_list.html")
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	<script type="text/javascript" src="/assets/js/jfinal-com-newsfeed-v1.0.js?v=10"></script>
+
+	<script type="text/javascript">
+		// 选中左侧菜单项
+		$(document).ready(function() {
+			setCurrentUserMenu();
+		});
+	</script>
+#end

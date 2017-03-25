@@ -1,0 +1,41 @@
+#set(seoTitle="反馈管理")
+#set(feedbackActive = 'class="active"')
+#@adminLayout()
+#define main()
+<div class="admin-content-box">
+	<div class="jf-admin-panel-box">
+		<ul class="jf-my-article-list">
+			#for(x : feedbackPage.list)
+				<li>
+					<h2 class="jf-my-article-title">
+						<a href="/feedback/#(x.id)" target="_blank">
+							#(x.title)
+						</a>
+						#if(x.report >= com.jfinal.club.common.model.Feedback::REPORT_BLOCK_NUM)
+							<span style="color:red; margin-left:5px; font-size: 16px;">(已屏蔽)</span>
+						#end
+					</h2>
+					<div class="jf-my-article-operation">
+						<span onclick="confirmAjaxAction('确定删除 feedback《#escape(x.title)》？ 删除后无法恢复！', '/admin/feedback/delete?id=#(x.id)')">删除</span>
+						#if(x.report < com.jfinal.club.common.model.Feedback::REPORT_BLOCK_NUM)
+							<span onclick="confirmAjaxAction('确定屏蔽《#escape(x.title)》？', '/admin/feedback/block?id=#(x.id)')">屏蔽</span>
+						#else
+							<span onclick="confirmAjaxAction('确定解除屏蔽《#escape(x.title)》？', '/admin/feedback/unblock?id=#(x.id)')">解除屏蔽</span>
+						#end
+						<a href="/admin/feedback/replyList?feedbackId=#(x.id)" target="_blank">回复</a>
+					</div>
+				</li>
+			#end
+		</ul>
+
+		#@paginate(feedbackPage.pageNumber, feedbackPage.totalPage, "/admin/feedback?p=")
+
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript">
+	</script>
+#end

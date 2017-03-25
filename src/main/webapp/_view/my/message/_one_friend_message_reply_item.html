@@ -1,0 +1,16 @@
+### message 模块 ajax reply 所需要的追加到列表最前方的 item
+<li>
+	<a href="/user/#(loginAccount.id)">
+		<img class="avatar" src="/upload/avatar/#(loginAccount.avatar)">
+	</a>
+	<div class="item">
+		<a class="user-name" href="/user/#(loginAccount.id)">#(loginAccount.nickName)</a>
+        <div class="jf-message-btn-box">
+            <span>#date(message.createAt, "MM-dd HH:mm")</span>
+            <a href="javascript:void(0);" onclick="deleteByMessageId(this, #(message.id));">删除</a>
+        </div>
+		<div class="text">
+			#(message.content)
+		</div>
+	</div>
+</li>

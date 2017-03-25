@@ -1,0 +1,85 @@
+#@layout()
+#define main()
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-left">
+
+	<!-- 项目详情 -->
+	<div class="jf-article">
+			<h1 class="jf-article-title">#(project.title)</h1>
+			<div class="jf-article-meta">
+				<a href="/user/#(project.accountId)">
+					<img src="/upload/avatar/#(project.avatar)">
+					<span>#(project.nickName)</span>
+				</a>
+				<span class="jf-article-create-at">#date(project.createAt, "yyyy-MM-dd HH:mm")</span>
+			</div>
+			<div class="jf-article-content">
+				#(project.content)
+			</div><!-- end of jf-article-content -->
+
+			<div class="jf-article-footer">
+				#if(project)
+					<span class="jf-tag-label">项目：</span>
+					<a class="jf-tag" href="/project/#(project.id)">#(project.name)</a>
+				#end
+                <div class="jf-article-btn">
+                    <i title="收藏" class="iconfont icon-favorite #(ret.isFavoriteActive)"></i><span>#(ret.favoriteCount)</span>
+                    <i title="点赞" class="iconfont icon-like #(ret.isLikeActive)"></i><span>#(ret.likeCount)</span>
+			    </div>
+			</div>
+
+		</div><!-- end of jf-article -->
+
+
+
+</div><!-- end of jf-panel-box -->
+
+<!-- 包含侧边栏文件 -->
+#include("_sidebar.html")
+#end
+
+#define css()
+	<!--<link type="text/css" rel="stylesheet" href="/assets/prettify/sunburst-by-james-for-prettify.css" />-->
+	<link type="text/css" rel="stylesheet" href="/assets/prettify/_darcula-from-highlight-js-by-james.css" />
+
+	<!--<link type="text/css" rel="stylesheet" href="/assets/highlight/darcula-by-james.css">-->
+#end
+#define js()
+	<script type="text/javascript" src="/assets/prettify/prettify.js"></script>
+	<!--<script type="text/javascript" src="/assets/highlight/highlight.pack-9.3.0.js"></script>-->
+    <script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("pre").addClass("prettyprint linenums");
+			prettyPrint();
+		});
+//		$(document).ready(function() {
+//			$('pre').each(function(i, block) {
+//				hljs.highlightBlock(block);
+//			});
+//		});
+
+        $(document).ready(function() {
+            // 绑定收藏事件
+            var aMap = {
+                btn: $("i.icon-favorite")
+                , isLoading: false
+                , isAdd: #(ret.isFavoriteAdd)
+            };
+            aMap.btn.bind("click", function() {
+                favorite('project', #(project.id),  aMap);
+            });
+
+            // 绑定点赞事件
+            var bMap = {
+                btn: $("i.icon-like")
+                , isLoading: false
+                , isAdd: #(ret.isLikeAdd)
+            };
+            bMap.btn.bind("click", function() {
+                like('project', #(project.id), bMap);
+            });
+        });
+	</script>
+#end

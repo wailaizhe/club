@@ -1,0 +1,47 @@
+#set(seoTitle=user.nickName + "的反馈")
+#@layout()
+#define main()
+<!-- 用户空间左侧菜单栏 -->
+#include("/_view/user/common/_user_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 反馈 -->
+	<div class="jf-my-panel">
+		<div class="jf-breadcrumb-box">
+			<ol class="jf-breadcrumb">
+				<li><a href="/user/#(user.id)">#(user.nickName)</a></li>
+				<li class="active">反馈</li>
+			</ol>
+		</div>
+
+		<ul class="jf-my-article-list">
+			#for(x : feedbackList)
+				<li>
+					<h2 class="jf-my-article-title">
+						<a href="/feedback/#(x.id)" target="_blank">
+							#(x.title)
+						</a>
+					</h2>
+					<div class="jf-my-article-operation">
+						### <span href="/feedback/#(x.id)">#(x.title)</span>
+					</div>
+				</li>
+			#end
+		</ul>
+	</div>
+
+</div>
+#end
+
+#define js()
+    <script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		// 选中左侧菜单项
+		$(document).ready(function() {
+			setCurrentUserMenu();
+		});
+	</script>
+#end

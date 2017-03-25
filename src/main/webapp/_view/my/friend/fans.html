@@ -1,0 +1,51 @@
+#set(seoTitle="我的粉丝")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/my/common/_my_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 项目 -->
+	<div class="jf-my-panel">
+		<div class="jf-breadcrumb-box">
+			<ol class="jf-breadcrumb">
+				<li><a href="/my">我的空间</a></li>
+				<li class="active">粉丝</li>
+			</ol>
+		</div>
+
+		<div class="friends">
+			#for(x : fansPage.getList())
+				<div>
+					<a href="/user/#(x.id)">
+						<img src="/upload/avatar/#(x.avatar)">
+					</a>
+					<a href="/user/#(x.id)" title="#(x.nickName)">#(x.nickName)</a>
+					<!-- 我的粉丝，同时又是我的关注，为互粉状态，故为取消互粉，否则为 +关注 -->
+					#if(x.isMyFriend)
+						<span onclick="deleteFriend(this, #(x.id));">取消互粉</span>
+					#else
+						<span onclick="addFriend(this, #(x.id));">+关注</span>
+					#end
+				</div>
+			#end
+
+            #@paginate(fansPage.pageNumber, fansPage.totalPage, "/my/fans?p=")
+		</div>
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		// 选中左侧菜单项
+		$(document).ready(function() {
+			setCurrentMyMenu();
+		});
+	</script>
+#end

@@ -1,0 +1,40 @@
+<div class="jf-sidebar-box jf-pull-left">
+	<div class="jf-sidebar user-info-box">
+		<div class="user-info clearfix">
+			<a class="left-col" href="/user/#(user.id)">
+				<img src="/upload/avatar/#(user.avatar)">
+			</a>
+            <div class="right-col">
+				<span class="nick-name">#(user.nickName)</span>
+                <span class="operation">
+                    #if(_friendRelation==0)
+                        未关注<a href='javascript:void(0);' onclick='handleFriend(this, true, #(user.id));'>关注</a>
+                    #elseif(_friendRelation==1)
+				        已关注<a href='javascript:void(0);' onclick='handleFriend(this, false, #(user.id));'>取消</a>
+                    #elseif(_friendRelation==2)
+                        粉丝<a href='javascript:void(0);' onclick='handleFriend(this, true, #(user.id));'>+关注</a>
+                    #else
+                        互相关注<a href='javascript:void(0);' onclick='handleFriend(this, false, #(user.id));'>取消</a>
+                    #end
+                </span>
+			</div>
+		</div>
+		<div class="user-friend-num">
+			<a href="/user/follow/#(user.id)">关注(#(_followNum))</a>
+			<a href="/user/fans/#(user.id)">粉丝(#(_fansNum))</a>
+            <a href="javascript:void(0);" title="收到的赞">赞(#(_likeNum))</a>
+		</div>
+	</div>
+
+	<div class="jf-sidebar jf-my-sidebar">
+		<ul class="jf-my-menu">
+			<li><a href="/user/#(user.id)">动&nbsp;态</a></li>
+			<li><a href="/user/share/#(user.id)">分&nbsp;享</a></li>
+			<li><a href="/user/feedback/#(user.id)">反&nbsp;馈</a></li>
+			<li><a href="/user/project/#(user.id)">项&nbsp;目</a></li>
+            <li><a href="/my/message/friend/#(user.id)">发私信</a></li>
+		</ul>
+	</div>
+
+    #include("/_view/adv/_aliyun.html")
+</div>

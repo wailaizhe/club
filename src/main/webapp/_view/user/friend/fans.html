@@ -1,0 +1,47 @@
+#set(seoTitle=user.nickName + "的粉丝")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/user/common/_user_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 项目 -->
+	<div class="jf-my-panel">
+		<div class="jf-breadcrumb-box">
+			<ol class="jf-breadcrumb">
+				<li><a href="/user/#(user.id)">#(user.nickName)</a></li>
+				<li class="active">粉丝</li>
+			</ol>
+		</div>
+
+		<div class="friends">
+			#for(x : fansPage.getList())
+				<div>
+					<a href="/user/#(x.id)">
+						<img src="/upload/avatar/#(x.avatar)">
+					</a>
+					<a href="/user/#(x.id)" title="#(x.nickName)">#(x.nickName)</a>
+                    <span id="#(x.id)">&nbsp;</span>
+				</div>
+			#end
+
+            #@paginate(fansPage.pageNumber, fansPage.totalPage, "/user/fans/" + user.id + "?p=")
+		</div>
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+    <script type="text/javascript" src="/assets/js/jfinal-com-user-friend-relation.js?v=1"></script>
+
+	<script type="text/javascript">
+		// 选中左侧菜单项
+		$(document).ready(function() {
+			setCurrentMyMenu();
+		});
+	</script>
+#end

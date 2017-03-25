@@ -1,0 +1,21 @@
+<!-- 侧边栏容器 -->
+<div class="jf-sidebar-box jf-pull-right">
+
+    #include("/_view/adv/_aliyun.html")
+
+	<!-- 侧边栏 -->
+	<div class="jf-sidebar">
+		<a href="/my/feedback/add" class="btn btn-primary btn-lg jf-sidebar-btn">我要反馈</a>
+	</div>
+
+	<!-- 侧边栏 -->
+	<div class="jf-sidebar">
+		<h4 class="jf-sidebar-name">热门反馈</h4>
+		<ul class="jf-sidebar-hot-list">
+			#for(x : hotFeedback)
+				<li><a href="/feedback/#(x.id)">#(x.title)</a></li>
+			#end
+		</ul>
+	</div>
+
+</div>

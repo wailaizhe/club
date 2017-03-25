@@ -1,0 +1,121 @@
+#set(seoTitle="修改文档")
+#@layout()
+#define main()
+<!-- 后台管理左侧菜单栏 -->
+#include("/_view/_admin/common/_admin_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-admin-panel-box jf-pull-right">
+
+	<!-- 分享 -->
+	<div class="jf-my-panel doc-admin-panel">
+		<div class="jf-breadcrumb-box">
+			<ol class="jf-breadcrumb">
+				<li><a href="/admin">后台管理</a></li>
+				<li><a href="/admin/doc">文档</a></li>
+				<li class="active">修改文档</li>
+			</ol>
+		</div>
+
+		<form id="myArticleForm" action="/admin/doc/update" method="post">
+			<div class="jf-my-article-add">
+				<div class="doc-admin-menu-input-box">
+					<div class="main-menu">
+						<span class="label">主菜单</span>
+						<input name="doc.mainMenu" placeholder="直接填写序号" value="#(doc.mainMenu)" >
+						<input name="oldMainMenu" type="hidden" value="#(doc.mainMenu)" >
+					</div>
+					<div class="sub-menu">
+						<span class="label">子菜单</span>
+						<input name="doc.subMenu" placeholder="一级菜单填写 0" value="#(doc.subMenu)" >
+						<input name="oldSubMenu" type="hidden" value="#(doc.subMenu)" >
+					</div>
+				</div>
+
+				<div class="doc-admin-title">
+					<span class="label">标题</span>
+					<input type="text" name="doc.title" value="#(doc.title)" />
+				</div>
+
+				<div class="content-box"  style="line-height: 20px;" >
+					<script id="container" name="doc.content" style="line-height: 20px;"  type="text/plain">#(doc.content)</script>
+				</div>
+				<div class="submit-box doc-admin-btn">
+				#set(publishNo = jfinal.com.common.model.Document::PUBLISH_NO)
+				#set(publishYes = jfinal.com.common.model.Document::PUBLISH_YES)
+					<select name="doc.publish" class="publish-select">
+						<option value="0" #(doc.publish == publishNo ? 'selected' : '' )>草稿</option>
+						<option value="1" #(doc.publish == publishYes ? 'selected' : '' )>发布</option>
+					</select>
+					<input class="submit-btn btn btn-primary" type="submit" value="提&nbsp;交" />
+					<!--<a class="submit-btn btn btn-primary" onclick="$('#myArticleForm').submit();">提&nbsp;交</a>-->
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+</div>
+#end
+
+#define css()
+	<link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-my-space-v1.0.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-admin-v1.0.css">
+	<link rel="stylesheet" type="text/css" href="/assets/fancyBox/jquery.fancybox.css" media="screen" />
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	<script type="text/javascript" src="/assets/js/jfinal-com-admin-v1.0.js"></script>
+
+	#include("/_view/_admin/common/_admin_article_form_js.html")
+	<script type="text/javascript">
+		// 上传时在 url 中用问号挂参的方式添加额外的参数 uploadType，用于分类管理图片
+		ue.ready(function() {
+			ue.execCommand('serverparam', {
+				'uploadType': 'document'
+			});
+		});
+
+		// 选中左侧菜单项
+		$(document).ready(function() {
+			setCurrentMyMenu();
+		});
+
+		// 也用 ajax 提交比较好，这样有利于在出异常的时候信息不会丢失
+		$(document).ready(function() {
+			$("#myArticleForm").ajaxForm({
+				dataType: "json"
+				, beforeSubmit: function(formData, jqForm, options) {
+					ue.sync();  // 同步一下 ueditor 中的数据到表单域
+				}
+				, success: function(ret) {
+					if (ret.isOk) {
+						location.href = "/admin/doc";
+					} else {
+						showErrorMsg(ret.msg);
+					}
+				}
+				, error: function(ret) {
+					alert(ret);
+				}
+				, complete: function(ret) { }       // 无论是 success 还是 error，最终都会被回调
+			});
+		});
+
+		function showErrorMsg(msg) {
+			layer.msg(msg, {
+					shift: 6
+					, shade: 0.4
+					, time: 0
+					, offset: "140px"
+					, closeBtn: 1
+					, shadeClose: true
+					,maxWidth: "1000"
+				}, function () {}
+			);
+		}
+
+	</script>
+#end

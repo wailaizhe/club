@@ -1,0 +1,19 @@
+<!-- 侧边栏容器 -->
+<div class="jf-sidebar-box jf-pull-right">
+    #include("/_view/adv/_aliyun.html")
+	<!-- 侧边栏 -->
+	<div class="jf-sidebar">
+		<a href="/my/share/add" class="btn btn-primary btn-lg jf-sidebar-btn">我要分享</a>
+	</div>
+
+	<!-- 侧边栏 -->
+	<div class="jf-sidebar">
+		<h4 class="jf-sidebar-name">热门分享</h4>
+		<ul class="jf-sidebar-hot-list">
+			#for(x : hotShare)
+				<li><a href="/share/#(x.id)">#(x.title)</a></li>
+			#end
+		</ul>
+	</div>
+
+</div>

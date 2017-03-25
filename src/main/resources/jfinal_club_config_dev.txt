@@ -1,0 +1,22 @@
+jdbcUrl=jdbc:mysql://localhost/jfinal_club?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+user=root
+password=root
+devMode=true
+
+# 指定管理员账号，多个管理员用逗号分隔 --------------------------------
+admin = test@test.com, otherAdmin@test.com
+
+# 邮件发送账号，用于激活注册账号与找回密码  ----------------------------
+emailServer=test.com
+fromEmail=no-reply@test.com
+emailPass=yourPassword
+
+# cron4j 任务调度配置  ------------------------------------------
+# pvUpdate 每小时更新一次 project_page_view、share_page_view、feedback_page_view
+cron4j=pvUpdate
+pvUpdate.cron=0 * * * *
+pvUpdate.class=com.jfinal.club.common.pageview.PageViewUpdateTask
+pvUpdate.enable=true
+
+
+

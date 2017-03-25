@@ -1,0 +1,51 @@
+#define adminLayout()
+<!DOCTYPE html>
+<html lang="zh-CN" xml:lang="zh-CN">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>#(seoTitle ?? "JFinal club 后台管理")</title>
+
+	<link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-v1.0.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-my-space-v1.0.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-admin-v1.1.css">
+	<link rel="stylesheet" type="text/css" href="/assets/fancyBox/jquery.fancybox.css" media="screen" />
+
+	#@css?()
+</head>
+
+<body>
+<div class="admin-left">
+	<a class="logo" href="/admin">JFinal Club</a>
+
+	<div class="menu">
+		<ul>
+			<li><a href="/admin" #(adminActive)>账户管理</a></li>
+			<li><a href="/admin/project" #(projectActive)>项目管理</a></li>
+			<li><a href="/admin/share" #(shareActive)>分享管理</a></li>
+			<li><a href="/admin/feedback" #(feedbackActive)>反馈管理</a></li>
+		</ul>
+	</div>
+</div>
+<div class="admin-right">
+	<div class="header">
+		<ul class="nav">
+			<li>管理员：#(loginAccount.nickName)</li>
+			<li><a href="/" target="_blank">去首页</a></li>
+			<li><a href="javascript:void(0);" onclick="logout();">退出</a></li>
+		</ul>
+	</div>
+	#@main()
+</div>
+	<script type="text/javascript" src="/assets/js/jquery.min-v1.11.3.js"></script>
+	<script type="text/javascript" src="/assets/js/jfinal-com-v1.0.js?v=15"></script>
+	<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	<script type="text/javascript" src="/assets/js/jfinal-com-admin-v1.0.js"></script>
+	<script type="text/javascript" src="/assets/fancyBox/jquery.fancybox.pack.js"></script>
+#@js?()
+</body>
+</html>
+#end

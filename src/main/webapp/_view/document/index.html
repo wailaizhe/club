@@ -1,0 +1,37 @@
+#@layout()
+#define main()
+<div class="jf-doc-box">
+	<div class="jf-doc-panel clearfix">
+		#include("_menu.html")
+		#include("_content.html")
+	</div>
+</div>
+#end
+
+#define css()
+	<!--<link type="text/css" rel="stylesheet" href="/assets/prettify/sunburst-by-james-for-prettify.css" />-->
+	<link type="text/css" rel="stylesheet" href="/assets/prettify/_darcula-from-highlight-js-by-james.css">
+	<!--<link type="text/css" rel="stylesheet" href="/assets/highlight/darcula-by-james.css">-->
+#end
+#define js()
+	<script type="text/javascript" src="/assets/prettify/prettify.js"></script>
+	<!--<script type="text/javascript" src="/assets/highlight/highlight.pack-9.3.0.js"></script>-->
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("pre").addClass("prettyprint linenums");
+			prettyPrint();
+		});
+		//		$(document).ready(function() {
+		//			$('pre').each(function(i, block) {
+		//				hljs.highlightBlock(block);
+		//			});
+		//		});
+
+		$(document).ready(function() {
+			var currentMenu = "##(doc.mainMenu)_#(doc.subMenu)";
+			$(currentMenu).addClass("active");
+		});
+	</script>
+#end

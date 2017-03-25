@@ -1,0 +1,190 @@
+#set(seoTitle="设置头像")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/my/common/_my_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 项目 -->
+	<div class="jf-my-panel">
+		<div class="jf-breadcrumb-box">
+			<ol class="jf-breadcrumb">
+				<li><a href="/my">我的空间</a></li>
+				<li class="active">设置头像</li>
+			</ol>
+		</div>
+
+		<div id="working_box" class="jf-my-info">
+			<!--<h2>设置头像</h2>-->
+
+			<!-- 图像上传表单区域 -->
+			<div class="avatar-upload-box">
+				<form id="avatar_upload_form" action="/my/setting/uploadAvatar" method="POST" enctype="multipart/form-data">
+					<table width="100%">
+						<tr>
+							<td style="width: 38%; text-align: right; padding-right: 15px;">
+								图片文件(不能超过1024k)：
+							</td>
+							<td style="width: 40%;">
+								<input type="file" name="avatar" style="width: 90%;" />
+							</td>
+							<td>
+								<input id="upload_btn" type="submit" value="上传" style="font-weight:bold; padding:0 11px 0 9px;" />
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+
+			<!-- 图像预览与裁切区域 -->
+			<div class="avatar-preview-crop-box">
+					<img id="jcrop_target"  />
+			</div>
+
+			<!-- 图像裁切参数保存区域 -->
+			<div id="avatar_save_box" class="avatar-crop-data-save-box">
+				<form id="avatar_save_form" action="/my/setting/saveAvatar" method="post">
+					<input type="hidden" id="x" name="x" />
+					<input type="hidden" id="y" name="y" />
+					<input type="hidden" id="width" name="width" />
+					<input type="hidden" id="height" name="height" />
+					<input id="avatar_save_btn" type="submit" value="保存选中区域" style="padding:2px 10px; font-weight:bold;"/>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+#end
+
+#define css()
+
+	<link rel="stylesheet" type="text/css" href="/assets/jcrop/css/jquery.Jcrop.min.css">
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/jcrop/js/jquery.Jcrop.min.js"></script>
+	<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		// 选中左侧菜单项
+		$(document).ready(function() {
+			setCurrentMyMenu();
+		});
+
+		// 使用 ajax form 上传文件
+		$(document).ready(function() {
+			// ajaxForm 可以是无参或者一个参数，参数只能是一个回调或json options，支持 jquery $.ajax的所有参数
+			$("#avatar_upload_form").ajaxForm({
+				dataType: "json",
+				// 在对表单域进行序列化之前回调
+				beforeSerialize: function($form, options) {
+					// 用于操作ueditor这样的编辑器向隐藏域写入数据
+					// editor.sync();
+					//获取html内容
+					// var html = ue.getContent();
+					//获取纯文本内容，返回: hello
+					// var txt = ue.getContentTxt();
+					// target.val(html);    // 设置到 hidden 域
+				},
+				// 这里可做一些 validator的工作，必须要返回 false 才不会提交表单
+				beforeSubmit: function(formData, jqForm, options) {
+					// var queryString = $.param(formData);
+					// var formElement = jqForm[0];
+
+					var uploadBtn = $("#upload_btn");
+					uploadBtn.attr("disabled", true);
+					uploadBtn.val("正在上传，请稍候...");
+					return true;
+				},
+				success: function(ret) {
+					if(ret.isOk) {
+						var jcropTarget = $("#jcrop_target");
+						jcropTarget.attr("src", ret.avatarUrl + "?r="+Math.random());
+						jcropTarget.show();
+						callJcrop();
+						$("#upload_btn").hide();
+						$("#avatar_save_box").show();
+					} else {
+						showErrorMsg(ret.msg);
+						var uploadBtn = $("#upload_btn");
+						uploadBtn.val("上传");
+						uploadBtn.attr("disabled", false);
+					}
+				},
+				error: function(ret) {  // 仅做为示例，只要后端是 status 200，就不会调用
+					showErrorMsg(ret.msg);
+				}
+			});
+		});
+
+		function callJcrop() {
+			$('#jcrop_target').Jcrop({
+				setSelect: [ 30, 30, 250, 250 ],
+				minSize:[30,30],
+				aspectRatio: 1,
+				onSelect: updateCoords,
+				onChange: updateCoords
+			});
+		}
+		function updateCoords(c){
+			$('#x').val(c.x);
+			$('#y').val(c.y);
+			$('#width').val(c.w);
+			$('#height').val(c.h);
+		}
+
+		// 使用 ajax form 提交图像裁剪坐标
+		$(document).ready(function() {
+			$("#avatar_save_form").ajaxForm({
+				dataType: "json",
+				beforeSubmit: function(formData, jqForm, options) {
+				},
+				success: function(ret) {
+					$("#working_box").hide();
+					if (ret.isOk) {
+						showOkMsg(ret.msg);
+					} else {
+						showErrorMsg(ret.msg);
+					}
+				},
+				error: function(ret) {
+					showErrorMsg(ret.msg);
+				}
+			});
+		});
+
+		function showOkMsg(msg) {
+			layer.msg(msg, {
+						shift: 0
+						, shade: 0.4
+						, time: 0
+						, offset: "140px"
+						, closeBtn: 1
+						, shadeClose: false
+						,maxWidth: "1000"
+					}, function () {
+						location.href = "/my";
+					}
+			);
+		}
+
+		function showErrorMsg(msg) {
+			layer.msg(msg, {
+					shift: 6
+					, shade: 0.4
+					, time: 0
+					, offset: "140px"
+					, closeBtn: 1
+					, shadeClose: true
+					,maxWidth: "1000"
+				}, function () {}
+			);
+		}
+
+	</script>
+#end

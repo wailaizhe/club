@@ -1,0 +1,74 @@
+#set(seoTitle="JFinal 极速开发社区")
+#@layout()
+#define main()
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-left">
+
+	<!-- 项目 -->
+	<div class="jf-panel">
+		<h2 class="jf-panel-name"><a href="/project">项目</a></h2>
+		<a class="jf-panel-more" href="/project">更多»</a>
+		<ul class="jf-panel-list">
+			#for(x : projectList)
+				<li>
+					<div class="jf-panel-img">
+						<a href="/user/#(x.accountId)"><img src="/upload/avatar/#(x.avatar)"></a>
+					</div>
+					<div class="jf-panel-item">
+						<h3><a href="/project/#(x.id)">#(x.title)</a></h3>
+						<p>
+							#(x.content)
+						</p>
+					</div>
+				</li>
+			#end
+		</ul>
+	</div>
+
+	<!-- 分享 -->
+	<div class="jf-panel">
+		<h2 class="jf-panel-name"><a href="/share">分享</a></h2>
+		<a class="jf-panel-more" href="/share">更多»</a>
+		<ul class="jf-panel-list">
+			#for(x : shareList)
+				<li>
+					<div class="jf-panel-img">
+						<a href="/user/#(x.accountId)"><img src="/upload/avatar/#(x.avatar)"></a>
+					</div>
+					<div class="jf-panel-item">
+						<h3><a href="/share/#(x.id)">#(x.title)</a></h3>
+						<p>
+							#(x.content)
+						</p>
+					</div>
+				</li>
+			#end
+		</ul>
+	</div>
+
+	<!-- 反馈 -->
+	<div class="jf-panel">
+		<h2 class="jf-panel-name"><a href="/feedback">反馈</a></h2>
+		<a class="jf-panel-more" href="/feedback">更多»</a>
+		<ul class="jf-panel-list">
+			#for(x : feedbackList)
+				<li>
+					<div class="jf-panel-img">
+						<a href="/user/#(x.accountId)"><img src="/upload/avatar/#(x.avatar)"></a>
+					</div>
+					<div class="jf-panel-item">
+						<h3><a href="/feedback/#(x.id)">#(x.title)</a></h3>
+						<p>
+							#(x.content)
+						</p>
+					</div>
+				</li>
+			#end
+		</ul>
+	</div>
+
+</div>
+
+<!-- 包含侧边栏文件 -->
+#include("_sidebar.html")
+#end

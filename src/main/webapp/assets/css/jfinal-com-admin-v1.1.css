@@ -1,0 +1,226 @@
+@charset "UTF-8";
+
+/* 后台管理在个人空间样式上额外添加的样式 */
+::-webkit-scrollbar-thumb {
+	background: #dbdbdb;
+	border-radius: 9px;
+	background-clip: content-box;
+	border: 5px solid transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: #d3d6dc;
+	border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #c2c2c2;
+	background-clip: content-box;
+}
+::-webkit-scrollbar {
+	width: 17px;
+	height: 17px;
+	background-color: transparent;
+	border-radius: 9px;
+}
+::-webkit-scrollbar {
+	width: 7px;
+	height: 7px;
+}
+::-webkit-scrollbar:hover {
+	background-color: #fafafa;
+}
+
+
+.admin-left {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width:180px;
+	background: #363636;
+}
+.admin-left .logo {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	padding-left: 15px;
+	font-size: 26px;
+	font-weight: bolder;
+	color: #22B4E4;
+	border-bottom: 1px solid #464646;
+	// border-top: 1px solid #464646;
+}
+.admin-left .menu {
+	position: absolute;
+	padding-top: 15px;
+	overflow-y: auto;
+	top: 52px;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	// background-color: red;
+}
+.admin-left .menu ul {
+	list-style-type: none;
+}
+.admin-left .menu li a {
+	display: block;
+	padding: 10px 0 10px 40px;
+	color: #eeeeee;
+	font-size: 18px;
+}
+.admin-left .menu a.active {
+	color: #22b5e5;
+	background: #212121;
+	border-left: 2px solid #22b5e5;
+}
+.admin-left .menu a:hover {
+	color: #22b5e5;
+	background: #212121;
+}
+
+.admin-right {
+	overflow: hidden;
+	background: #fff;
+	// background: #e9ebee;
+	// background: #f0f0f0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 180px;
+	transition: left .3s;
+}
+.admin-right .header {
+	background: #f7f7f7;
+	height: 50px;
+	line-height: 50px;
+	padding: 0 20px;
+	border-bottom: 1px solid #d6d6d6;
+}
+.admin-right .header ul.nav {
+	position: absolute;
+	right: 30px;
+	list-style-type: none;
+	// background: red;
+}
+.admin-right .header ul li {
+	display: inline-block;
+	padding: 0 10px 0 10px;
+}
+.admin-content-box {
+	position: absolute;
+	top: 52px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow-y: scroll;
+}
+
+
+/* 个人中心右侧内容 */
+.jf-admin-panel-box {
+	width: 95%;
+	// width: 920px;
+	line-height: 1.5;
+	font-size: 18px;
+	padding: 16px 0 20px 52px;
+}
+.jf-my-article-list {
+	padding-bottom: 0;
+}
+.jf-my-article-list > li {
+	padding: 10px 0;
+}
+.jf-my-article-title > a, .jf-my-article-title > span {
+	font-size: 18px;
+}
+.jf-my-article-operation > a, .jf-my-article-operation > span {
+	font-size: 16px;
+}
+
+.jf-my-article-title > .jf-tag {
+	display: inline-block;
+	margin: 0 20px;
+	padding: 4px 8px;
+	background-color: #CFC;
+	color: #060;
+	border-bottom: 1px solid #B1D3EB;
+	border-right: 1px solid #B1D3EB;
+}
+.jf-my-article-title > .jf-tag:hover {
+	background-color: #40AA53;
+	color: #fff;
+}
+
+/* 自定义 fancybox 外框样式*/
+.my-fancy-box .fancybox-outer {
+	border-radius: 0;
+}
+
+/* fancyBox 弹出窗通用样式，不同模块的样式放在各自的html中 */
+.fancy-table {
+
+}
+.fancy-table th,
+.fancy-table td {
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+.fancy-table th {
+	text-align: right;
+	padding: 10px 40px 10px 0;
+}
+
+/* 文档管理 add、edit 面板 */
+.doc-admin-panel {
+	// background-color: #fcfcfc;
+	// background-color: #fafafa;
+	background-color: #f9f9f9;
+}
+.doc-admin-panel input,
+.doc-admin-panel select {
+	padding: 5px 8px;
+	outline: none;
+	// background-color: #fefefe;
+	border: 1px solid #b0b0b0;
+	transition: border linear .2s;
+}
+
+.doc-admin-menu-input-box {
+	margin: 15px 0;
+}
+.doc-admin-menu-input-box .main-menu,
+.doc-admin-menu-input-box .sub-menu {
+	display: inline-block;
+}
+.doc-admin-menu-input-box .main-menu {
+	margin-right: 55px;
+}
+.doc-admin-menu-input-box input {
+	width: 270px;
+	margin-left: 10px;
+}
+.doc-admin-title {
+	margin: 25px 0;
+}
+.doc-admin-title input {
+	margin-left: 30px;
+	width: 675px;
+}
+.doc-admin-btn {
+	margin-right: 45px;
+}
+.doc-admin-btn .publish-select {
+	position: relative;
+	top: 3px;
+	right: 30px;
+	padding: 2px 8px;
+}
+.doc-list {
+	position: relative;
+}
+.doc-list .jf-my-article-operation {
+	position: absolute;
+	right: 0;
+	bottom: 2px;
+}

@@ -1,0 +1,137 @@
+#set(seoTitle="我的私信")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/my/common/_my_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 我的信息 -->
+	<div class="jf-my-panel">
+        <div class="jf-breadcrumb-box">
+            <ol class="jf-breadcrumb">
+                <li><a href="/my">我的空间</a></li>
+                <li><a href="/my/message">私信</a></li>
+                <li class="active"><a style="color:red;" href="/user/#(friend.id)" target="_blank">#(friend.nickName)</a></li>
+            </ol>
+        </div>
+
+		#include("_one_friend_message_list.html")
+	</div>
+
+</div>
+#end
+
+#define css()
+    <style type="text/css">
+        .jf-message-btn-box {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 16px;
+        }
+        .jf-message-btn-box span {
+            color: #a0a0a0;
+            margin-right: 15px;
+        }
+        .jf-message-btn-box a {
+            margin-right: 5px;
+        }
+    </style>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	<!--<script type="text/javascript" src="/assets/js/jfinal-com-newsfeed-v1.0.js?v=10"></script>-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#replyContent").focus();
+			setCurrentMyMenu();            // 选中左侧菜单项
+            bindSubmitEvent(#(friend.id));
+		});
+
+        /**
+         * 为发送按钮定事件
+         */
+        function bindSubmitEvent(friendId) {
+            var newsFeedReplyListBox = $("div.newsfeed-reply-list-box");
+            var submitBtn = newsFeedReplyListBox.find("span.newsfeed-reply-submit");
+            var submitLoading = newsFeedReplyListBox.find("img.newsfeed-reply-loading");
+            var textarea = $("#replyContent");
+
+            var map = {
+                isLoading: false
+                , submit_btn: submitBtn
+                , submit_loading: submitLoading
+                , textarea: textarea
+                , friendId: friendId
+            };
+
+            submitBtn.bind("click", function() {
+                sendMessage("/my/message/send", map);
+            });
+
+            textarea.bind("keydown", function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.keyCode==13) {    // ctrl + 回车发送消息
+                    sendMessage("/my/message/send", map);   // $("#submit_btn").trigger("click");   // 简写 $("#submit_btn").click();
+                }
+            });
+        }
+        // 发送消息
+        function sendMessage(url, map) {
+            if (map.isLoading) {
+                return ;
+            }
+
+            $.ajax(url, {
+                type: "POST"
+                , cache: false
+                , dataType: "json"
+                , data: {
+                    friendId : map.friendId,
+                    replyContent: map.textarea.val()
+                }
+                , beforeSend: function() {
+                    var textAreaVal = map.textarea.val();
+                    if (textAreaVal == null || textAreaVal == "") {
+                        showReplyErrorMsg("请先输入要发送的内容！");
+                        return false;
+                    }
+
+                    map.isLoading = true;
+                    map.submit_btn.hide();
+                    map.submit_loading.show();
+                }
+                , success: function(ret) {
+                    if (ret.isOk) {
+                        map.textarea.focus();                                // 添加 focus() 避免 IE 有时将光标停在最前方
+                        map.textarea.val("").focus();                        // 回复完成后，textarea 清空内容并设置焦点
+                        map.textarea.css({height:"35px"});                   // 数据清空后，高度重置一下，注意高度与 css 文件中保持一致
+                        map.textarea.parent().parent().after(ret.replyItem); // 插入刚刚回复的内容 replyItem
+                    } else {
+                        showReplyErrorMsg(ret.msg);                   // 调用 jfinal-com-v1.0.js 的方法，与 share reply 中共用的功能
+                    }
+                }
+                , complete: function() {
+                    map.submit_loading.hide();
+                    map.submit_btn.show();
+                    map.isLoading = false;
+                }
+            });
+        }
+
+        // 删除某一条私信
+        function deleteByMessageId(self, messageId) {
+            confirmAjaxGet("删除后无法恢复，确定要删除？", "/my/message/deleteByMessageId?messageId=" + messageId, {
+                success: function(ret) {
+                    if (ret.isOk) {
+                        $(self).parents(".newsfeed-reply-list li").remove();
+                    }
+                }
+            });
+        }
+
+    </script>
+#end

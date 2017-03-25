@@ -1,0 +1,38 @@
+<div class="jf-sidebar-box jf-pull-left">
+	<div class="jf-sidebar user-info-box">
+		<div class="user-info clearfix">
+			<a class="left-col" href="/my">
+				<img src="/upload/avatar/#(loginAccount.avatar)">
+			</a>
+			<div class="right-col">
+				<span class="nick-name">#(loginAccount.nickName)</span>
+                <span class="operation">
+				    <a class="my-operation" href="/my/setting/info">更换头像</a>
+                </span>
+			</div>
+		</div>
+		<div class="user-friend-num">
+			<a href="/my/follow">关注(#(_followNum))</a>
+			<a href="/my/fans">粉丝(#(_fansNum))</a>
+            <a href="javascript:void(0);" title="收到的赞">赞(#(_likeNum))</a>
+		</div>
+	</div>
+
+	<div class="jf-sidebar jf-my-sidebar">
+		<ul class="jf-my-menu">
+			<li><a href="/my">动态消息</a></li>
+			<li><a href="/my/share">我的分享</a></li>
+			<li><a href="/my/feedback">我的反馈</a></li>
+			<li><a href="/my/project">我的项目</a></li>
+            <li><a href="/my/message">我的私信</a></li>
+            <li><a href="/my/favorite">我的收藏</a></li>
+		</ul>
+		<span class="jf-my-menu-separator"></span>
+		<ul class="jf-my-menu">
+			<li><a href="/my/setting/info">设置头像</a></li>
+			<li><a href="/my/setting/password">修改密码</a></li>
+		</ul>
+	</div>
+
+    #include("/_view/adv/_aliyun.html")
+</div>

@@ -1,0 +1,702 @@
+@charset "UTF-8";
+
+/* 我的空间左侧菜单，个人空间已弃用，后台管理仍然在使用 */
+.jf-my-menu-box {
+	height: 290px;
+	width: 160px;
+	line-height: 1.42857143;
+}
+.jf-my-menu-title {
+	margin: 10px 0 10px 28px;
+	color: #23527c;
+	font-size: 22px;
+	line-height: 22px;
+}
+.jf-my-menu {
+	margin: 10px 0 0 0;
+	list-style-type: none;
+}
+.jf-my-menu li a {
+	font-size: 20px;
+	color: #2d64b3;
+	letter-spacing: 3px;
+	padding: 3px 20px 3px 0;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+.jf-my-menu li a:hover,
+.jf-my-menu li.jf-my-menu-current a {
+	color: #fff;
+	background-color: #6e7b8b;
+}
+.jf-my-menu-separator {
+	display: block;
+	height: 1px;
+	margin: 8px 10px 5px 0;
+	background-color: #c0c0c0;
+	// background-color: #464646;
+}
+
+/* 个人中心右侧内容 */
+.jf-my-panel {
+	padding: 0 20px;
+	min-height: 480px;
+}
+
+/* 面包屑 */
+.jf-breadcrumb-box {
+	position: relative;
+}
+.jf-breadcrumb {
+	padding: 8px 0;
+	// margin-bottom: 25px;
+	list-style: none;
+	// background-color: #f5f5f5;
+	// border-radius: 4px;
+}
+.jf-breadcrumb > li {
+	display: inline-block;
+	// padding: 8px 0;
+}
+.jf-breadcrumb > li + li:before {
+	padding: 0 4px;
+	color: #ccc;
+	content: "/\00a0";
+}
+.jf-breadcrumb > .active {
+	// color: #999;
+	color: #23527c;
+}
+.jf-breadcrumb,
+.jf-breadcrumb a {
+	font-size: 16px;
+}
+.jf-breadcrumb a:hover,
+.jf-breadcrumb a:focus {
+	color: #2a6496;
+	cursor: pointer;
+	text-decoration: none;
+}
+.jf-breadcrumb a:active,
+.jf-breadcrumb a:hover {
+	outline: 0;
+}
+/* 添加文章 */
+.jf-my-article-add {
+	padding: 0 30px;
+}
+.jf-my-article-add .label {
+	padding: 0;
+	line-height: 1;
+	vertical-align: baseline;
+	color: #23527c;
+	font-size: 20px;
+	font-weight: normal;
+}
+.jf-my-article-add .title-box,
+.jf-my-article-add .related-project-box {
+	margin: 8px 0 20px 0;
+}
+.jf-my-article-add .title,
+.jf-my-article-add .related-project-name {
+	padding: 5px 8px;
+	width: 100%;
+	outline: none;
+	background-color: #fefefe;
+	border: 1px solid #b0b0b0;
+
+	// border: 1px solid #D9D9D9;
+	// border-top-color: #C0C0C0;
+	// border-left-color: #d0d0d0;
+	transition: border linear .2s;
+}
+.jf-my-article-add .content-box {
+	/* 解决 ueditor 工具栏变高变形的bug，经测试ueditor固定了该值为 20px */
+	line-height: 20px;
+	margin: 8px 0 20px 0;
+}
+.jf-my-article-add .submit-box {
+	text-align: right;
+	margin-bottom: 20px;
+}
+.jf-my-article-add .submit-btn {
+	padding: 3px 1.2em;
+	margin-right: 5px;
+	font-size: 18px;
+	border-radius: 2px;
+}
+.jf-my-article-add .submit-btn:hover {
+	color: #fff;
+	background-color: #286090;
+}
+
+/* 我的空间 article 列表 */
+.jf-btn-box {
+	position: absolute;
+	right: 10px;
+	top: 15px;
+}
+.jf-my-btn {
+	padding: 3px 0.7em;
+	margin-right: 5px;
+	// width: 90px;
+	font-size: 18px;
+	border-radius: 3px;
+}
+.jf-my-btn:hover {
+	color: white;
+	background-color: #286090;
+}
+
+.jf-my-article-list {
+	padding: 0 10px 20px;
+	list-style-type: none;
+}
+.jf-my-article-list > li {
+	padding: 15px 0;
+	border-bottom: 1px solid #ddd;
+}
+.jf-my-article-title {
+	display: inline-block;
+	max-width: 710px;
+}
+.jf-my-article-list > li:last-child {
+	border-bottom-width: 0;
+}
+.jf-my-article-title > a,
+.jf-my-article-title > span {
+	// float: right;
+	padding: 0;
+	line-height: 1;
+	vertical-align: baseline;
+	color: #23527c;
+	// color: #333;
+	font-size: 20px;
+	font-weight: normal;
+	text-decoration: none;
+}
+.jf-my-article-operation {
+	float: right;
+	margin-top: 12px;
+}
+.jf-my-article-operation > a,
+.jf-my-article-operation > span {
+	font-size: 17px;
+	line-height: 1.5;
+	color: #5e5e5e;
+	text-decoration: none;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+/* 设置头像 */
+.avatar-upload-box {
+	margin-top: 55px;
+	margin-bottom: 20px;
+}
+.jf-my-info > h2 {
+	text-align: center;
+	margin-bottom: 25px;
+}
+
+.avatar-preview-crop-box {
+	margin: 0 0 20px 180px;
+	text-align: center; /* 对jcrop无效*/
+	min-height: 250px;
+}
+.avatar-preview-crop-box > img {
+	display: none;
+}
+.avatar-crop-data-save-box {
+	text-align: center;
+	margin: 0 0 20px;
+	display: none;
+}
+
+/* 修改密码 */
+.password-update-box {
+	margin-top: 25px;
+}
+.update-password-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.update-password-table tr {
+	height: 30px;
+}
+.update-password-table th {
+	width: 35%;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: right;
+}
+.update-password-table td {
+	padding-left: 20px;
+	height: 50px;
+	text-align: left;
+}
+.update-password-table td input[type="password"] {
+	padding: 3px 5px;
+	width: 220px;
+}
+.update-password-table td input[type="submit"] {
+	padding: 1px 5px;
+	margin-left: 158px;
+	width: 60px;
+}
+.update-password-table #password_update_btn {
+	font-weight:bold;
+}
+
+/* 动态消息样式 */
+.jf-feed-nick-name {
+	color: #576B95;
+	text-decoration: none;
+}
+.jf-feed-nick-name:hover {
+
+}
+
+.newsfeed-tabs {
+	padding: 25px 0 0 20px;
+	// border-bottom: 1px solid #b0b0b0;
+	border-bottom: 1px solid #6e7b8b;
+	list-style-type: none;
+}
+.newsfeed-tabs li a {
+	float: left;
+	margin-right: 20px;
+	padding: 3px 20px;
+	font-size: 16px;
+	// color: #434343;
+	color: #515151;
+	background: #d7d7d7;
+}
+.newsfeed-tabs li.refer-me a {
+	padding: 3px 8px;
+}
+.newsfeed-tabs a.current {
+	color: #fff;
+	background-color: #6E7B8B;
+}
+.newsfeed-tabs li a:hover {
+	color: #fff;
+	background-color: #6E7B8B;
+}
+.newsfeed-list-box {
+	padding: 0 10px 20px;
+}
+.newsfeed-list {
+	list-style-type: none;
+}
+.newsfeed-list > li {
+	padding: 15px 0;
+	overflow: hidden;
+	zoom: 1;
+// border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid #e8e8e8;
+// border-bottom: 1px dashed #b0b0b0;
+}
+.newsfeed-list > li:last-child {
+	border-bottom: none;
+}
+.newsfeed-user-img {
+	float: left;
+	margin-top: 5px;
+}
+.newsfeed-user-img img {
+	height: 60px;
+	width: 60px;
+	border-radius: 5px;
+}
+.newsfeed-item {
+	/* 首页列表设置的为 80px */
+	margin-left: 80px;
+	/*margin-left: 90px;*/
+	/*margin-right: 40px;*/
+	font-size: 16px;
+}
+.newsfeed-user-name {
+	font-size: 20px;
+	margin-bottom: 2px;
+	display: inline-block;
+}
+/* 我的空间已不用此样式，目前只有用户空间 "/user/id" 在使用，以后合并两个功能后将弃用此样式 */
+.newsfeed-time-for-user-space-only {
+	float: right;
+	// color: #999999;
+	color: #a0a0a0;
+	font-size: 14px;
+	line-height: 14px;
+	padding-top: 6px;
+}
+.newsfeed-ref {
+	font-size: 20px;
+}
+.newsfeed-ref a:hover{
+	color: #0044cc;
+}
+.newsfeed-text {
+// margin-bottom: 5px;
+	font-size: 18px;
+    line-height: 30px;
+    // line-height: 1.6;
+}
+.newsfeed-ref-link {
+	color: #4466bb;
+	font-size: 16px;
+}
+.newsfeed-ref-link:hover {
+	color: #0000aa;
+}
+.newsfeed-ref-parent {
+	background-color: #EEEEEE;
+	margin: 10px 0 0 0;
+	padding: 3px 5px;
+	border-radius: 3px;
+}
+.newsfeed-ref-parent-image {
+	float: left;
+}
+.newsfeed-ref-parent-image img {
+	width: 35px;
+	height: 35px;
+}
+.newsfeed-ref-parent-title-box {
+	margin-left: 50px;
+	font-size: 20px;
+}
+.news-ref-parent-title {
+	/* 让被引用的链接文字在多行时底部具有合适空间 */
+	padding-bottom: 2px;
+}
+.news-ref-parent-title a {
+	/* 让被引用的链接文字居中 */
+	vertical-align: middle;
+	// line-height: 1.5;
+}
+.news-ref-parent-title a:hover {
+	color: #0044cc;
+}
+
+/* user 用户空间左上角头像 */
+/*.user-avatar img {*/
+	/*width: 150px;*/
+	/*height: 150px;*/
+	/*margin: 0 10px 15px 0;*/
+	/*border: 3px solid #fff;*/
+/*}*/
+
+.newsfeed-icon {
+	margin: 13px 10px 0 5px;
+	font-size: 16px;
+	line-height: 1.0;
+}
+.newsfeed-icon .newsfeed-time {
+	display: inline-block;
+	color: #a0a0a0;
+}
+.newsfeed-icon .reply {
+	float: right;
+}
+
+/* 动态加载动画框 */
+.newsfeed-loading {
+	margin-top: 8px;
+	padding: 8px 0;
+	text-align: center;
+	font-size: 18px;
+	background-color: #EEEEEE;
+}
+.newsfeed-loading img {
+	height: 22px;
+}
+
+/* 动态回复列表 div */
+.newsfeed-reply-list-box {
+	position: relative;
+	margin-top: 18px;
+	text-align: center;
+	font-size: 18px;
+
+	/*background-color: #EEEEEE;*/
+	/*background-color: #f3f3f3;*/
+	/*background-color: #f5f5f5;*/
+	background-color: #f9f9f9;
+
+	border-radius: 3px;
+	border: 1px solid #b8b8b8;
+	/*border: 1px solid #c0c0c0;*/
+	/*border: 1px solid #c8c8c8;*/
+	/*border: 1px solid #d0d0d0;*/
+	/*border: 1px solid #d8d8d8;*/
+	/*display: none;*/
+}
+
+/* 列表向上箭头 */
+.newsfeed-reply-caret-up {
+	position: absolute;
+	z-index: 100;
+	top: -9px;
+	right: 30px;
+	font-size: 0;
+	line-height: 0;
+	height:10px;
+	width: 10px;
+}
+.newsfeed-reply-caret-up:before {
+	position: absolute;
+	border-left: 9px solid transparent;
+	border-right: 9px solid transparent;
+	border-bottom: 9px solid #c0c0c0;
+	font-size: 0;
+	line-height: 0;
+	content: "";
+}
+
+.newsfeed-reply-list {
+	list-style-type: none;
+	padding: 3px 15px 0 15px;
+}
+.newsfeed-reply-list li {
+	// border-bottom: 1px solid #f9f9f9;
+	border-bottom: 1px dashed #cccccc;
+	padding: 15px 0;
+}
+.newsfeed-reply-list > li:last-child {
+	border-bottom-width: 0;
+}
+
+.newsfeed-reply-list .avatar {
+	float: left;
+	height: 35px;
+	width: 35px;
+}
+.newsfeed-reply-list .item {
+	position: relative;
+	margin-left: 48px;
+	text-align: left;
+	min-height: 35px;
+}
+.newsfeed-reply-list .item textarea {
+	display: block;
+	word-wrap: break-word;
+	word-break: break-all;
+
+	/* 去掉div获取焦点的时候的虚框效果 */
+	outline: none;
+	-moz-outline: 0;
+	resize: none;
+	/* 去掉x y 轴两个滚动条 */
+	overflow: hidden;
+
+	/*border: 1px solid #9a9a9a;*/
+	border: 1px solid #4682b4;
+	background-color: #fff;
+	/*width: 510px;*/
+	width: 500px;
+	height: 35px;
+
+	/* 上下方向的 padding 值合适，才能避免在输入时高度不合理减少 */
+	padding: 4px 6px 4px 6px;
+
+	font-size: 18px;
+	line-height: 1.5;
+}
+
+/* 动态回复发送按钮 */
+.newsfeed-reply-submit {
+	position: absolute;
+	right: 0;
+	bottom: 3px;
+	padding: 2px 6px 3px 6px;
+	background-color: #4682b4;
+	color: #ffffff;
+	font-size: 16px;
+	border-radius: 3px;
+}
+.newsfeed-reply-submit:hover {
+	color: #ffffff;
+	cursor: pointer;
+	background-color: #204d74;
+}
+.newsfeed-reply-loading {
+	position: absolute;
+	right: 7px;
+	bottom: 2px;
+	display: none;
+}
+
+.newsfeed-reply-list .item .user-name {
+	line-height: 1;
+	display: inline-block;
+	vertical-align: text-top;
+}
+.newsfeed-reply-list .item .text {
+	margin-top: -5px;
+    line-height: 1.6;
+}
+/* 列表内的添加 @xx 内容的回复按钮 */
+.newsfeed-reply-link {
+	float: right;
+	color: #2d64b6;
+	font-size: 16px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+.newsfeed-more-reply {
+	text-align: center;
+}
+
+/* 重新设计左侧菜单，从这里开始 */
+.user-info-box {
+	padding: 20px 15px 15px 15px;
+	/* http://layer.layui.com/ */
+	/*background-color: #393D49;*/
+	/* 最佳配色 #4476A7 */
+	background-color: #4476A7;
+
+	/*background-color: #3a5795;*/
+	/*background-color: #363636;*/
+
+	/*dnspod 两种黑*/
+	/*background-color: #212121;*/
+	/*background-color: #363636;*/
+	/*background-color: #6E7B8B;*/
+	/*background-color: #6e7b8b;*/
+	/*background-color: #337ab7;*/
+	/*background-color: #4267b2;*/
+	/*background-color: #445d84;*/
+	/*background-color: #2f4050;*/
+
+	/* oschina 空间管理*/
+	/*background-color: #4682b4;*/
+
+	/*background-color: #337ab7;*/
+	/*background-color: #286090;*/
+}
+
+/* 个人空间用户空间左上角用户信息 */
+.user-info .left-col {
+	float: left;
+}
+.user-info .left-col img {
+	width: 100px;
+	height: 100px;
+	border: 3px solid #fff;
+	border-radius: 5px;
+}
+
+.user-info .right-col {
+	margin-left: 100px;
+    text-align: center;
+    color: #fff;
+}
+.right-col .nick-name {
+    display: block;
+	margin: 10px 0 0 5px;
+	font-size: 22px;
+}
+.right-col .operation {
+    display: block;
+    margin: 10px 0 0 20px;
+    font-size: 16px;
+}
+.right-col a {
+    font-size: 14px;
+    padding: 1px 5px;
+    margin-left: 5px;
+    color: #fff;
+}
+/* 额外控制我的空间的我的操作--更换头像链接靠左一点 */
+.operation a.my-operation {
+    margin-right: 18px;
+}
+
+.right-col a:hover,
+.user-friend-num a:hover {
+	color: #4476A7;
+	background-color: #fff;
+}
+.user-friend-num {
+	text-align: center;
+	margin-top: 12px;
+}
+.user-friend-num a {
+	color: #fff;
+	font-size: 15px;
+	padding: 1px 5px;
+    margin: 0 3px;
+}
+
+/* user info 下方的菜单 */
+.jf-my-sidebar {
+	padding: 5px 20px 15px 20px;
+	/*background-color: #d7d7d7;*/
+	/*background-color: #393D49;*/
+	/*background-color: #d5d5d5;*/
+	/*background-color: #4476A7;*/
+	/*background-color: #D6D6D6;*/
+	/*background-color: #337ab7;*/
+	/*background-color: #286090;*/
+	/*background-color: #b8b8b8;*/
+	/*background-color: #c0c0c0;*/
+	/*background-color: #c8c8c8;*/
+	/* d0 还可以 */
+	/*background-color: #d0d0d0;*/
+	/* 更好了 */
+	background-color: #d8d8d8;
+}
+.jf-my-menu-separator {
+	display: block;
+	height: 1px;
+	margin: 8px 0 5px 0;
+	/*background-color: #c0c0c0;*/
+	/*background-color: #464646;*/
+	background-color: #a8a8a8;
+}
+/*.jf-my-menu li a {*/
+	/*color: #337ab7;*/
+	/*color: #2d64b3;*/
+/*}*/
+
+/* 添加关注、粉丝样式 */
+.friends {
+	margin: 0 0 20px 35px;
+}
+.friends div {
+	display: inline-block;
+	margin: 10px 10px;
+	width: 110px;
+	text-align: center;
+}
+.friends img,
+.friends > a,
+.friends span {
+	display: block;
+	text-align: center;
+	font-size: 14px;
+}
+.friends img {
+	width: 80px;
+	height: 80px;
+	margin-left: 15px;
+    border-radius: 50px;
+}
+.friends a {
+	/* 以下三行实现超出部分使用省略号的效果 */
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	margin-top: 5px;
+	font-size: 16px;
+}
+.friends span {
+	color: #337ab7;
+}
+.friends span:hover {
+	color: #0044cc;
+	cursor: pointer;
+}
+

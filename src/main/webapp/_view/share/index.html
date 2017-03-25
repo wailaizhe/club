@@ -1,0 +1,33 @@
+#@layout()
+#define main()
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-left">
+	<!-- 项目 -->
+	<div class="jf-panel">
+		<h2 class="jf-panel-name">分享</h2>
+		<ul class="jf-panel-list">
+			#for(x : sharePage.list)
+				<li>
+					<div class="jf-panel-img">
+						<a href="/user/#(x.accountId)"><img src="/upload/avatar/#(x.avatar)"></a>
+					</div>
+					<div class="jf-panel-item">
+						<h3><a href="/share/#(x.id)">#(x.title)</a></h3>
+						<p>
+							#(x.content)
+						</p>
+					</div>
+				</li>
+			#end
+		</ul>
+
+		<!-- 分页 -->
+		#@paginate(sharePage.pageNumber, sharePage.totalPage, "/share?p=")
+
+	</div>
+
+</div>
+
+<!-- 包含侧边栏文件 -->
+#include("_sidebar.html")
+#end

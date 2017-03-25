@@ -1,0 +1,63 @@
+#set(seoTitle="我的反馈")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/my/common/_my_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 反馈 -->
+	<div class="jf-my-panel">
+		<div class="jf-breadcrumb-box">
+			<ol class="jf-breadcrumb">
+				<li><a href="/my">我的空间</a></li>
+				<li class="active">反馈</li>
+			</ol>
+			<div class="jf-btn-box">
+				<a class="jf-my-btn btn btn-primary" href="/my/feedback/add" >创&nbsp;&nbsp;建</a>
+			</div>
+		</div>
+
+		<ul class="jf-my-article-list">
+			#for(x : feedbackList)
+				<li>
+					<h2 class="jf-my-article-title">
+						<a href="/feedback/#(x.id)" target="_blank">
+							#(x.title)
+						</a>
+					</h2>
+					<div class="jf-my-article-operation">
+						<a href="/my/feedback/edit?id=#(x.id)">修改</a>
+						<span onclick="confirmLayer('删除后无法恢复，确定要删除？', '/my/feedback/delete?id=#(x.id)');">删除</span>
+					</div>
+				</li>
+			#end
+		</ul>
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		// 选中左侧菜单项
+		$(document).ready(function() {
+		setCurrentMyMenu();
+		});
+
+		function confirmLayer(msg, operationUrl) {
+			layer.confirm(msg, {
+				icon: 0
+				, title:''        // 设置为空串时，title消失，并自动切换关闭按钮样式，比较好的体验
+				, shade: 0.4
+				, offset: "139px"
+			}, function(index) {                  // 只有点确定后才会回调该方法
+				location.href = operationUrl;
+				layer.close(index);                 // 需要调用 layer.close(index) 才能关闭对话框
+			});
+		}
+	</script>
+#end

@@ -1,0 +1,57 @@
+<div class="newsfeed-list-box">
+	<ul class="newsfeed-list">
+		#for(x : newsFeedPage.list)
+			<li>
+				<div class="newsfeed-user-img">
+					<a href="/user/#(x.accountId)">
+						<img src="/upload/avatar/#(x.avatar)" />
+					</a>
+				</div>
+				<div class="newsfeed-item">
+					<div class="newsfeed-user-name">
+						<a href="/user/#(x.accountId)">#(x.nickName)</a>
+					</div>
+					#if(x.text)
+						<div class="newsfeed-text">
+							#(x.text)
+						</div>
+					#end
+					#if(x.ref)
+						<div class="newsfeed-ref">
+							<a href="#(x.ref.href)" target="_blank">#(x.ref.title)</a>
+						</div>
+					#end
+					#if(x.refParent)
+						<div class="newsfeed-ref-parent clearfix">
+							<div class="newsfeed-ref-parent-image">
+								<a href="/user/#(x.refParent.accountId)">
+									<img src="/upload/avatar/#(x.refParent.avatar)" />
+								</a>
+							</div>
+							<div class="newsfeed-ref-parent-title-box">
+								<div class="news-ref-parent-title">
+									<a href="#(x.refParent.href)" target="_blank">
+										#(x.refParent.title)
+									</a>
+								</div>
+							</div>
+						</div>
+					#end
+						<div class="newsfeed-icon">
+							<span class="newsfeed-time">
+								#date(x.createAt, "MM-dd HH:mm")
+							</span>
+							#if(x.isRefTypeProject())
+								<a class="reply" href="/project/#(x.getRefId())" target="_blank">原文</a>
+							#else
+							<a class="reply" href="javascript:void(0);" onclick="showNewsFeedReplyList(this, #(x.id), '#(x.nickName)');">回复</a>
+							#end
+						</div>
+				</div>
+			</li>
+		#end
+	</ul>
+
+	<!-- 包含分页组件 -->
+	#@paginate(newsFeedPage.pageNumber, newsFeedPage.totalPage, paginateLink)
+</div>

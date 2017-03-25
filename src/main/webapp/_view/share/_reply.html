@@ -1,0 +1,53 @@
+<!-- 文章回复 -->
+<div class="jf-reply" id="reply_start">
+	<h2>
+		评论
+	</h2>
+	<ul class="jf-reply-list">
+		#for(x : replyPage.list)
+			<li>
+				<div class="jf-reply-user-img">
+					<a href="/user/#(x.accountId)" target="_blank">
+						<img src="/upload/avatar/#(x.avatar)" />
+					</a>
+				</div>
+				<div class="jf-reply-item">
+					<div class="jf-reply-user-name">
+						<a href="/user/#(x.accountId)" target="_blank">
+							#(x.nickName)
+						</a>
+					</div>
+					<div class="jf-reply-time">
+						#date(x.createAt, "MM-dd HH:mm")
+					</div>
+					<div class="jf-reply-content">
+						#(x.content)
+						<div class="jf-reply-and-delete">
+							<a class="jf-reply-link" href="#replyContent" onclick="atAndReply('#(x.nickName)');">回复</a>
+							#if(loginAccount && loginAccount.id == x.accountId)
+								<a class="jf-reply-delete" href="javascript:void(0);" onclick="deleteReply(this, '/share/deleteReply?id=#(x.id)');">删除</a>
+							#end
+						</div>
+					</div>
+				</div>
+			</li>
+		#end
+
+		<li>
+			<div class="jf-reply-user-img">
+				<img src="/upload/avatar/#(loginAccount.avatar ?? 'x.jpg')" />
+			</div>
+			<div class="jf-reply-item">
+				<div class="jf-reply-input-box">
+					<textarea id="replyContent" class="jf-reply-mini-editor" oninput="autoHeight(this, 30);" onkeyup="autoHeight(this, 30);" placeholder="我有话说"></textarea>
+					<span id="submit_btn" class="jf-reply-submit" title="按 Ctrl + Enter 发送">发送</span>
+					<img id="submit_loading" class="jf-reply-loading" src="/assets/img/loading-2.gif" >
+				</div>
+			</div>
+		</li>
+	</ul>
+
+	<!-- 包含分页组件 -->
+	#set(append="#reply_start")
+	#@paginate(replyPage.pageNumber, replyPage.totalPage, "/share/" + share.id + "?p=")
+</div>

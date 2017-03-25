@@ -1,0 +1,45 @@
+#set(seoTitle="我的私信")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/my/common/_my_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 我的信息 -->
+	<div class="jf-my-panel">
+        <div class="jf-breadcrumb-box">
+            <ol class="jf-breadcrumb">
+                <li><a href="/my">我的空间</a></li>
+                <li class="active">私信</li>
+            </ol>
+        </div>
+
+		#include("_all_friend_message_list.html")
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	<!--<script type="text/javascript" src="/assets/js/jfinal-com-newsfeed-v1.0.js?v=10"></script>-->
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			setCurrentMyMenu();            // 选中左侧菜单项
+		});
+
+        // 删除某一个用户的所有私信往来
+        function deleteByFriendId(self, friendId) {
+            confirmAjaxGet("即将删除与该用户的所有私信，确定要删除？", "/my/message/deleteByFriendId?friendId=" + friendId, {
+                success: function(ret) {
+                    if (ret.isOk) {
+                        $(self).parents(".newsfeed-list li").remove();
+                    }
+                }
+            });
+        }
+	</script>
+#end

@@ -1,0 +1,37 @@
+#-- 用户渲染 ajax reply 所需要的追加到列表最后的 item  --#
+<li>
+	<div class="jf-reply-user-img">
+		<a href="/user/#(loginAccount.id)" target="_blank">
+			<img src="/upload/avatar/#(loginAccount.avatar)" />
+		</a>
+	</div>
+	<div class="jf-reply-item">
+		<div class="jf-reply-user-name">
+			<a href="/user/#(loginAccount.id)" target="_blank">
+				#(loginAccount.nickName)
+			</a>
+		</div>
+		<div class="jf-reply-time">
+			#date(reply.createAt, "MM-dd HH:mm")
+		</div>
+		<div class="jf-reply-content">
+			#(reply.content)
+			<div class="jf-reply-and-delete">
+				<a class="jf-reply-link" href="#replyContent" onclick="atAndReply('#(loginAccount.nickName)');">回复</a>
+				<a class="jf-reply-delete" href="javascript:void(0);" onclick="deleteReply(this, '/share/deleteReply?id=#(reply.id)');">删除</a>
+			</div>
+		</div>
+	</div>
+</li>
+<script type="text/javascript">
+	// 包裹在 $(document).ready(function() {}; 中也可以正常工作
+	// 用于显示/隐藏 reply item 中的删除链接
+	$(".jf-reply-list li").hover(
+		function () {
+			$(this).addClass("hover");
+		},
+		function () {
+			$(this).removeClass("hover");
+		}
+	);
+</script>

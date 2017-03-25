@@ -1,0 +1,36 @@
+<script type="text/javascript" src="/assets/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/assets/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+	// 加载 ueditor，传入的初始化参数可以覆盖掉 ueditor.config.js 中的配置
+	// 对于同一项目中使用不同的配置的 ueditor 场景非常有用
+	var ue = UE.getEditor('container', {
+		initialFrameHeight:300
+		// , initialFrameWidth:796
+		,wordCount:false
+	});
+
+	// 由于ctrl+回车提交表单会让ajax form失效，所以让该快捷键失效
+	// $(document).ready(function() {ue.shortcutkeys["autosubmit"] = "";});
+	// 另一种让该表单提交快捷键失效的方法，注册同名plugin覆盖掉旧的，这种方式更加简单可靠
+	UE.plugin.register('autosubmit',function(){});
+
+	UE.plugin.register('jfajaxsubmit',function(){
+		return {
+			shortcutkey:{
+				"jfajaxsubmit":"ctrl+13" // ctrl + 回车 提交表单
+			},
+			commands:{
+				'jfajaxsubmit':{
+					execCommand:function () {
+						var me=this;
+						if(me.fireEvent("beforesubmit")===false){
+							return;
+						}
+						me.sync();
+						$("#myArticleForm").submit();
+					}
+				}
+			}
+		}
+	});
+</script>

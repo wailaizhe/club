@@ -1,0 +1,99 @@
+#set(seoTitle="创建项目")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/my/common/_my_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 项目 -->
+	<div class="jf-my-panel">
+		<div class="jf-breadcrumb-box">
+			<ol class="jf-breadcrumb">
+				<li><a href="/my">我的空间</a></li>
+				<li><a href="/my/project">项目</a></li>
+				<li class="active">创建项目</li>
+			</ol>
+		</div>
+
+		<form id="myArticleForm" action="/my/project/save" method="post">
+			<div class="jf-my-article-add">
+				<span class="label">名称</span>
+				<div class="title-box">
+					<input class="title" type="text" name="project.name" placeholder="项目唯一标识" />
+				</div>
+				<span class="label">标题</span>
+				<div class="title-box">
+					<input class="title" type="text" name="project.title" placeholder="项目文章标题" />
+				</div>
+				<span class="label">正文</span>
+				<div class="content-box"  style="line-height: 20px;" >
+					<script id="container" name="project.content" style="line-height: 20px;"  type="text/plain"></script>
+				</div>
+				<div class="submit-box">
+					<input class="submit-btn btn btn-primary" type="submit" value="提&nbsp;交" />
+					<!--<a class="submit-btn btn btn-primary" onclick="$('#myArticleForm').submit();">提&nbsp;交</a>-->
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	#include("/_view/my/common/_my_space_article_form_js.html")
+	<script type="text/javascript">
+		// 上传时在 url 中用问号挂参的方式添加额外的参数 uploadType，用于分类管理图片
+		ue.ready(function() {
+			ue.execCommand('serverparam', {
+				'uploadType': 'project'
+			});
+		});
+
+		// 选中左侧菜单项
+		$(document).ready(function() {
+			setCurrentMyMenu();
+		});
+
+		// 也用 ajax 提交比较好，这样有利于在出异常的时候信息不会丢失
+		$(document).ready(function() {
+			$("#myArticleForm").ajaxForm({
+				dataType: "json"
+				, beforeSubmit: function(formData, jqForm, options) {
+					ue.sync();  // 同步一下 ueditor 中的数据到表单域
+				}
+				, success: function(ret) {
+					if (ret.isOk) {
+						location.href = "/my/project";
+					} else {
+						showErrorMsg(ret.msg);
+					}
+				}
+				, error: function(ret) {
+					alert(ret);
+				}
+				, complete: function(ret) { }       // 无论是 success 还是 error，最终都会被回调
+			});
+		});
+
+		function showErrorMsg(msg) {
+			layer.msg(msg, {
+					shift: 6
+					, shade: 0.4
+					, time: 0
+					, offset: "140px"
+					, closeBtn: 1
+					, shadeClose: true
+					,maxWidth: "1000"
+				}, function () {}
+			);
+		}
+
+	</script>
+#end

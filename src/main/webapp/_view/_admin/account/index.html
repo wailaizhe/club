@@ -1,0 +1,49 @@
+#set(seoTitle="账户管理")
+#set(adminActive = 'class="active"')
+#@adminLayout()
+#define main()
+<div class="admin-content-box">
+	<!-- 项目 -->
+	<div class="jf-admin-panel-box">
+		<ul class="jf-my-article-list">
+			#for(x : accountPage.list)
+				<li>
+					<h2 class="jf-my-article-title">
+						<span onclick="showFancyBox('/admin/account/edit?id=#(x.id)')" style="cursor: pointer;">
+							#(x.nickName)
+						</span>
+						#if(x.status == com.jfinal.club.common.model.Account::STATUS_LOCK_ID)
+							<span style="color:red; margin-left:5px; font-size: 16px;">(已锁定)</span>
+						#end
+					</h2>
+					<div class="jf-my-article-operation">
+						<span onclick="showFancyBox('/admin/account/edit?id=#(x.id)')">查看</span>
+						#if(x.status == com.jfinal.club.common.model.Account::STATUS_OK)
+							<span onclick="confirmAjaxAction('确定锁定用户《#(x.nickName)》？', '/admin/account/lock?id=#(x.id)')">锁定</span>
+						#elseif(x.status == com.jfinal.club.common.model.Account::STATUS_LOCK_ID)
+							<span onclick="confirmAjaxAction('确定解锁用户《#(x.nickName)》？', '/admin/account/unlock?id=#(x.id)')">解锁</span>
+						#else
+							<span>未激活</span>
+						#end
+					</div>
+				</li>
+			#end
+		</ul>
+
+		#@paginate(accountPage.pageNumber, accountPage.totalPage, "/admin/account?p=")
+
+	</div>
+
+</div>
+#end
+
+#define css()
+
+#end
+
+#define js()
+
+	<script type="text/javascript">
+
+	</script>
+#end

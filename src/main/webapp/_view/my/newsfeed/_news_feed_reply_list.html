@@ -1,0 +1,37 @@
+<div class="newsfeed-reply-list-box">
+	<i class="newsfeed-reply-caret-up"></i>
+	<ul class="newsfeed-reply-list">
+
+		<li>
+			<img class="avatar" src="/upload/avatar/#(loginAccount.avatar)">
+			<div class="item">
+				<textarea id="replyContent" oninput="autoHeight(this, 35);" onkeyup="autoHeight(this, 35);" placeholder=""></textarea>
+				<span class="newsfeed-reply-submit" title="按 Ctrl + Enter 发送">发送</span>
+				<img class="newsfeed-reply-loading" src="/assets/img/loading-2.gif" >
+			</div>
+		</li>
+
+		#for(x : replyList)
+			<li>
+				<a href="/user/#(x.accountId)">
+					<img class="avatar" src="/upload/avatar/#(x.avatar)">
+				</a>
+				<div class="item">
+					<a class="user-name" href="/user/#(x.accountId)">#(x.nickName)</a>
+					<div class="text">
+						#(x.content)
+					</div>
+				</div>
+			</li>
+		#end
+
+		<li>
+			#if(replyList.size() == 10)
+				<a class="newsfeed-more-reply" href="#(showAllReplyUrl)#reply_start" target="_blank">查看所有评论 »</a>
+			#else
+				<a class="newsfeed-more-reply" href="#(showAllReplyUrl)" target="_blank">查看原文</a>
+			#end
+		</li>
+
+	</ul>
+</div>

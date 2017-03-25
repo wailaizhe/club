@@ -1,0 +1,35 @@
+<div class="newsfeed-reply-list-box" style="margin: 18px 35px 25px 35px;">
+    <ul class="newsfeed-reply-list">
+
+        <li>
+            <img class="avatar" src="/upload/avatar/#(loginAccount.avatar)">
+            <div class="item">
+                <textarea style="width:530px;" id="replyContent" oninput="autoHeight(this, 35);" onkeyup="autoHeight(this, 35);" placeholder=""></textarea>
+                <span class="newsfeed-reply-submit" title="按 Ctrl + Enter 发送">发送</span>
+                <img class="newsfeed-reply-loading" src="/assets/img/loading-2.gif" >
+            </div>
+        </li>
+
+        #for(x : messagePage.list)
+            <li>
+                <a href="/user/#(x.sender)">
+                    <img class="avatar" src="/upload/avatar/#(x.avatar)">
+                </a>
+                <div class="item">
+                    <a class="user-name" href="/user/#(x.sender)">#(x.nickName)</a>
+                    <div class="jf-message-btn-box">
+                        <span>#date(x.createAt, "MM-dd HH:mm")</span>
+                        <a href="javascript:void(0);" onclick="deleteByMessageId(this, #(x.id));">删除</a>
+                    </div>
+
+                    <div class="text">
+                        #(x.content)
+                    </div>
+                </div>
+            </li>
+        #end
+    </ul>
+</div>
+
+<!-- 包含分页组件 -->
+#@paginate(messagePage.pageNumber, messagePage.totalPage, "/my/message/friend/" + friend.id + "?p=")

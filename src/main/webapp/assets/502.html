@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>JFinal 社区系统更新中...</title>
+	<script type="text/javascript">
+		function reload() {
+			document.location.reload();
+		}
+		function showtime(){
+			var d = new Date();
+			document.write((d.getMonth() + 1) + "月" + d.getDate() + "日 " + d.getHours() + "点" + d.getMinutes() + "分");
+		}
+		setTimeout("reload()", 5000);
+	</script>
+	<style>
+		body {
+			background: #fff;
+			font-family: "Microsoft Yahei", 微软雅黑, "Helvetica Neue", Arial, Verdana, Tahoma, "\5b8b\4f53", sans-serif;
+		}
+		a {
+			color:#CE4614;
+		}
+		#msg-box {
+			margin-top: 100px;
+			color: #CE4614;
+			font-size: 18px;
+			text-align:center;
+		}
+		#msg-box .logo {
+			border-bottom:5px solid #ECE5D9;
+			padding-bottom:30px;
+		}
+		#msg-box .title {
+			font-size:26px;
+			padding-top:30px;
+		}
+		#msg-box .msg {
+			font-size:18px;
+			padding-top:22px;
+		}
+	</style>
+</head>
+<body>
+<div id='msg-box'>
+	<div class='logo'><a href="/"><img src="/assets/img/jfinal_logo.png"></a></div>
+	<div class='title'>欢迎来到 JFinal 极速开发社区，系统可能正在更新中，请稍候片刻</div>
+	<div class='msg'>现在是：<script>showtime();</script>，正在重新连接...</div>
+</div>
+</body>
+</html>

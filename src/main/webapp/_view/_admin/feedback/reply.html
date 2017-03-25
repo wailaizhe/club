@@ -1,0 +1,23 @@
+#set(seoTitle="分享回复管理")
+#set(feedbackActive = 'class="active"')
+#@adminLayout()
+#define main()
+<div class="admin-content-box">
+	<div class="jf-admin-panel-box">
+		<ul class="jf-my-article-list">
+			#for(x : feedbackReplyList)
+				<li class="clearfix">
+					<div style="float: left; width: 735px; font-size: 18px; border: 1px solid #fff;">
+						#(x.content)
+					</div>
+					<div class="jf-my-article-operation" style="margin-top: 0;">
+						<span onclick="confirmAjaxAction('确定要删除？ 删除后无法恢复！', '/admin/feedback/deleteReply?replyId=#(x.id)')">删除</span>
+						<a href="/feedback/#(feedbackId)" target="_blank">详情</a>
+					</div>
+				</li>
+			#end
+		</ul>
+	</div>
+
+</div>
+#end

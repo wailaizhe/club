@@ -1,0 +1,105 @@
+#define layout()
+<!DOCTYPE html>
+<html lang="zh-CN" xml:lang="zh-CN">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="keywords" content="#(seoKeywords ?? 'JFinal,JFinal官网,JFinal教程,JFinal微信,JFinal Weixin,极速开发,快速开发框架,web框架')" />
+	<meta name="description" content="#(seoDescr ?? 'JFinal 极速开发官方网站')" />
+	<title>#(seoTitle ?? "JFinal 极速开发社区")</title>
+
+	<link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-v1.0.css?v=15">
+    <link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-my-space-v1.0.css?v=15">
+    <link rel="stylesheet" type="text/css" href="/assets/iconfont/iconfont.css">
+	
+	### 模板函数安全调用，找到 css() 模板函数则调用，找不到则直接跳过
+	### 适合于部分页面在 layout.html 提供的 css 文件之外，还需额外添加 css 资源的应用场景
+	#@css?()
+
+</head>
+
+<body>
+<!-- 头部容器 -->
+<div class="jf-header-box">
+	<!-- logo容器 -->
+	<h3 class="jf-logo-box">
+		<a href="/" title="返回首页">JFinal</a>
+	</h3>
+
+	<!-- 导航菜单容器 -->
+	<ul class="jf-nav-menu-box">
+		<li><a href="/">首页</a></li>
+		<li><a href="/project">项目</a></li>
+		<li><a href="/share">分享</a></li>
+		<li><a href="/feedback">反馈</a></li>
+		<li><a href="/doc">文档</a></li>
+	</ul>
+
+	#if(loginAccount)
+		<!-- 登录用户工具栏容器 -->
+		<div class="jf-user-toolbar-box">
+			<!-- 登录用户图像 -->
+			<a href="/my" class="jf-login-user-img">
+				<img src="/upload/avatar/#(loginAccount.avatar)">
+			</a>
+
+			<!-- 登录用户下拉菜单 -->
+			<span class="jf-login-user-dropdown-menu">
+				<a href="/my">
+					<span>#(loginAccount.nickName)</span><i class="jf-caret-down"></i><!-- i class="fa fa-caret-down"></i -->
+				</a>
+				<ul class="jf-login-user-dropdown-menu-content">
+					<li><a href="/my">我的空间</a></li>
+                    <li><a href="/my/referMe">@提到我</a></li>
+                    <li><a href="/my/message">我的私信</a></li>
+					<li><a href="javascript:void(0);" onclick="logout();">退出登录</a></li>
+				</ul>
+			</span>
+		</div>
+		#if(_remind)
+			<div class="remind-layer">
+				<i class="remind-layer-caret-up"></i>
+				#if(_remind.referMe > 0)<a href="/my/referMe">#(_remind.referMe) 条@提到我</a>#end
+                #if(_remind.fans > 0)<a href="/my/fans">#(_remind.fans) 位新粉丝</a>#end
+                #if(_remind.message > 0)<a href="/my/message">#(_remind.message) 条私信</a>#end
+			</div>
+		#end
+	#else
+		<!-- 未登录用户 -->
+		<div class="jf-no-login">
+			<span><a href="/login" onclick="appendReturnUrl(this)">登录</a></span>
+			<span><a href="/reg">注册</a></span>
+		</div>
+	#end
+
+</div>
+
+<!-- 中部主体容器 -->
+<div class="jf-body-box clearfix">
+	#@main()
+</div>
+
+<!-- 底部容器 -->
+<div class="jf-footer-box">
+	<ul>
+		<li><a href="/share/1" target="_blank">关于JFinal</a></li>
+		<li><a href="javascript:void(0);">友情链接</a></li>
+		#--
+		<li>
+			<script src="http://s5.cnzz.com/z_stat.php?id=100033&web_id=100033" language="JavaScript"></script>
+		</li>
+		--#
+	</ul>
+</div>
+<script type="text/javascript" src="/assets/js/jquery.min-v1.11.3.js"></script>
+<script type="text/javascript" src="/assets/js/jfinal-com-v1.0.js?v=15"></script>
+
+### 模板函数安全调用，找到 js() 模板函数则调用，找不到则直接跳过
+### 适合于部分页面在 layout.html 提供的 js 文件之外，还需额外添加 js 资源的应用场景
+#@js?()
+</body>
+</html>
+#end

@@ -1,0 +1,12 @@
+<div class="doc-menu-box">
+#for(x : mainMenuList)
+	<h2 class="doc-main-menu">
+		<a href="javascript:void(0);">#(x.mainMenu) #(x.title)</a>
+	</h2>
+	<ul class="doc-sub-menu">
+	#for(y : x.subMenuList)
+		<li id="#(y.mainMenu)_#(y.subMenu)"><a href="/doc/#(y.mainMenu)-#(y.subMenu)">#(y.mainMenu).#(y.subMenu) #(y.title)</a></li>
+	#end
+	</ul>
+#end
+</div>

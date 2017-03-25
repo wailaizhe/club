@@ -1,0 +1,35 @@
+#set(seoTitle="动态消息")
+#@layout()
+#define main()
+<!-- 个人空间左侧菜单栏 -->
+#include("/_view/my/common/_my_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-right">
+
+	<!-- 动态消息 -->
+	<div class="jf-my-panel">
+		<ul class="newsfeed-tabs clearfix">
+			<li><a href="/my" title="关注好友查看他们的动态">动态</a></li>
+            <li><a href="/my/hot" title="社区热门动态">热门</a></li>
+			<li class="refer-me" title="@提到我的动态"><a href="/my/referMe">@提到我</a></li>
+			<!--<li><a href="/my/onlyMe">我自己</a></li>-->
+		</ul>
+
+		#include("_news_feed_list.html")
+	</div>
+
+</div>
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	<script type="text/javascript" src="/assets/js/jfinal-com-newsfeed-v1.0.js?v=11"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			setCurrentMyMenu();            // 选中左侧菜单项
+			setCurrentNewsFeedTab();     // 选中右侧 tab 项
+		});
+	</script>
+#end

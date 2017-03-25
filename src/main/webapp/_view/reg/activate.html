@@ -1,0 +1,27 @@
+#set(seoTitle="JFinal 账号激活")
+#@layout()
+#define main()
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-left">
+	<!-- 注册 -->
+	<div class="jf-panel jf-reg-box">
+		<div id="jf_reg_msg_ok_panel" style="display: block;">
+			<h2 class="jf-reg-panel-name">
+				#(ret.isOk ? "激活成功" : "激活失败")
+			</h2>
+			<div id="reg_ok_msg">
+				#if(ret.isOk)
+					点击前往登录页面，&nbsp;<a href="/login" style="color:blue;">立即登录</a>
+					#else
+						#(ret.msg)
+				#end
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!-- 包含侧边栏文件 -->
+<!-- include "_sidebar.html" / -->
+#end
+

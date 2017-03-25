@@ -1,0 +1,112 @@
+#@layout()
+#define main()
+<!-- 内容容器 -->
+<div class="jf-panel-box jf-pull-left">
+
+	<!-- 分享详情 -->
+	<div class="jf-article">
+		<h1 class="jf-article-title">#(feedback.title)</h1>
+		<div class="jf-article-meta">
+			<a href="/user/#(feedback.accountId)">
+				<img src="/upload/avatar/#(feedback.avatar)">
+				<span>#(feedback.nickName)</span>
+			</a>
+			<span class="jf-article-create-at">#date(feedback.createAt, "yyyy-MM-dd HH:mm")</span>
+			<span class="jf-report" onclick="report();" style="display: none;">举报</span>
+		</div>
+		<div class="jf-article-content">
+			#(feedback.content)
+		</div><!-- end of jf-article-content -->
+
+		<div class="jf-article-footer">
+			#if(project)
+				<span class="jf-tag-label">项目：</span>
+				<a class="jf-tag" href="/project/#(project.id)" target="_blank">#(project.name)</a>
+			#end
+            <div class="jf-article-btn">
+                <i title="收藏" class="iconfont icon-favorite #(ret.isFavoriteActive)"></i><span>#(ret.favoriteCount)</span>
+                <i title="点赞" class="iconfont icon-like #(ret.isLikeActive)"></i><span>#(ret.likeCount)</span>
+            </div>
+		</div>
+
+	</div><!-- end of jf-article -->
+
+	#include("_reply.html")
+
+
+</div><!-- end of jf-panel-box -->
+
+<!-- 包含侧边栏文件 -->
+#include("_sidebar.html")
+#end
+
+#define css()
+	<!--<link type="text/css" rel="stylesheet" href="/assets/prettify/sunburst-by-james-for-prettify.css" />-->
+	<link type="text/css" rel="stylesheet" href="/assets/prettify/_darcula-from-highlight-js-by-james.css">
+	<!--<link type="text/css" rel="stylesheet" href="/assets/highlight/darcula-by-james.css">-->
+#end
+#define js()
+	<script type="text/javascript" src="/assets/prettify/prettify.js"></script>
+	<!--<script type="text/javascript" src="/assets/highlight/highlight.pack-9.3.0.js"></script>-->
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("pre").addClass("prettyprint linenums");
+			prettyPrint();
+		});
+//		$(document).ready(function() {
+//			$('pre').each(function(i, block) {
+//				hljs.highlightBlock(block);
+//			});
+//		});
+
+		$(document).ready(function() {
+			var map = {
+				isLoading: false
+				, submit_btn: $("#submit_btn")
+				, submit_loading: $("#submit_loading")
+			};
+
+			$("#submit_btn").bind("click", function() {
+				reply("/feedback/saveReply", "#(feedback.id)", map);
+			});
+
+			$("#replyContent").bind("keydown", function(e) {
+				if ((e.ctrlKey || e.metaKey) && e.keyCode==13) {    // ctrl + 回车发送消息
+					reply("/feedback/saveReply", "#(feedback.id)", map);   // $("#submit_btn").trigger("click");   // 简写 $("#submit_btn").click();
+				}
+			});
+
+			// 用于显示/隐藏 reply item 中的删除链接
+			$(".jf-reply-list li").hover(
+				function () {
+					$(this).addClass("hover");
+				},
+				function () {
+					$(this).removeClass("hover");
+				}
+			);
+
+            // 绑定收藏事件
+            var aMap = {
+                btn: $("i.icon-favorite")
+                , isLoading: false
+                , isAdd: #(ret.isFavoriteAdd)
+            };
+            aMap.btn.bind("click", function() {
+                favorite('feedback', #(feedback.id),  aMap);
+            });
+
+            // 绑定点赞事件
+            var bMap = {
+                btn: $("i.icon-like")
+                , isLoading: false
+                , isAdd: #(ret.isLikeAdd)
+            };
+            bMap.btn.bind("click", function() {
+                like('feedback', #(feedback.id), bMap);
+            });
+		});
+	</script>
+#end

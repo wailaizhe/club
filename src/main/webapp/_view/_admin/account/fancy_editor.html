@@ -1,0 +1,40 @@
+<style type="text/css">
+	.fancy-panel {
+		min-width: 600px;
+		/*height: 500px;*/
+	}
+	.fancy-form .avatar {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+</style>
+
+<div class="fancy-panel">
+	<form id="fancyForm" class="fancy-form" action="/admin/account/update" method="post">
+		<div class="avatar">
+			<img src="/upload/avatar/#(account.avatar)" />
+		</div>
+		<table class="fancy-table">
+			<tr>
+				<th>ID</th>
+				<td>#(account.id)</td>
+			</tr>
+			<tr>
+				<th>email</th>
+				<td>#(account.userName)</td>
+			</tr>
+			<tr>
+				<th>昵称</th>
+				<td>#(account.nickName)</td>
+			</tr>
+			<tr>
+				<th>状态</th>
+				<td>#(account.status)</td>
+			</tr>
+			<!--<tr>-->
+				<!--<th>&nbsp;</th>-->
+				<!--<td><input type="button" value="提交" onclick="update()"></td>-->
+			<!--</tr>-->
+		</table>
+	</form>
+</div>

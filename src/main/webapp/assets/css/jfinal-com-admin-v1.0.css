@@ -1,0 +1,98 @@
+@charset "UTF-8";
+
+/* 后台管理在个人空间样式上额外添加的样式 */
+
+/* 个人中心右侧内容 */
+.jf-admin-panel-box {
+	width: 900px;
+	// width: 920px;
+	line-height: 1.5;
+	font-size: 18px;
+}
+
+.jf-my-article-title > .jf-tag {
+	display: inline-block;
+	margin: 0 20px;
+	padding: 4px 8px;
+	background-color: #CFC;
+	color: #060;
+	border-bottom: 1px solid #B1D3EB;
+	border-right: 1px solid #B1D3EB;
+}
+.jf-my-article-title > .jf-tag:hover {
+	background-color: #40AA53;
+	color: #fff;
+}
+
+/* 自定义 fancybox 外框样式*/
+.my-fancy-box .fancybox-outer {
+	border-radius: 0;
+}
+
+/* fancyBox 弹出窗通用样式，不同模块的样式放在各自的html中 */
+.fancy-table {
+
+}
+.fancy-table th,
+.fancy-table td {
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+.fancy-table th {
+	text-align: right;
+	padding: 10px 40px 10px 0;
+}
+
+/* 文档管理 add、edit 面板 */
+.doc-admin-panel {
+	// background-color: #fcfcfc;
+	// background-color: #fafafa;
+	background-color: #f9f9f9;
+}
+.doc-admin-panel input,
+.doc-admin-panel select {
+	padding: 5px 8px;
+	outline: none;
+	// background-color: #fefefe;
+	border: 1px solid #b0b0b0;
+	transition: border linear .2s;
+}
+
+.doc-admin-menu-input-box {
+	margin: 15px 0;
+}
+.doc-admin-menu-input-box .main-menu,
+.doc-admin-menu-input-box .sub-menu {
+	display: inline-block;
+}
+.doc-admin-menu-input-box .main-menu {
+	margin-right: 55px;
+}
+.doc-admin-menu-input-box input {
+	width: 270px;
+	margin-left: 10px;
+}
+.doc-admin-title {
+	margin: 25px 0;
+}
+.doc-admin-title input {
+	margin-left: 30px;
+	width: 675px;
+}
+.doc-admin-btn {
+	margin-right: 45px;
+}
+.doc-admin-btn .publish-select {
+	position: relative;
+	top: 3px;
+	right: 30px;
+	padding: 2px 8px;
+}
+.doc-list {
+	position: relative;
+}
+.doc-list .jf-my-article-operation {
+	position: absolute;
+	right: 0;
+	bottom: 2px;
+}

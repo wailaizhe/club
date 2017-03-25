@@ -1,0 +1,70 @@
+#set(seoTitle="文档管理")
+#@layout()
+#define main()
+<!-- 后台管理左侧菜单栏 -->
+#include("/_view/_admin/common/_admin_menu_bar.html")
+
+<!-- 内容容器 -->
+<div class="jf-admin-panel-box jf-pull-right">
+
+	<!-- 文档 -->
+	<div class="jf-my-panel">
+		<div class="jf-breadcrumb-box">
+			<ol class="jf-breadcrumb">
+				<li><a href="/admin">后台管理</a></li>
+				<li class="active">文档</li>
+			</ol>
+			<div class="jf-btn-box">
+				<a class="jf-my-btn btn btn-primary" href="/admin/doc/add" >创&nbsp;&nbsp;建</a>
+			</div>
+		</div>
+
+		<ul class="jf-my-article-list">
+			#for(x : docList)
+				<li style="padding: 5px 0;" class="doc-list">
+					<h2 class="jf-my-article-title">
+						<a href="/doc/#(x.mainMenu)-#(x.subMenu)" target="_blank">
+							#(x.mainMenu)、#(x.title)
+						</a>
+					</h2>
+					<div class="jf-my-article-operation">
+						<a href="/admin/doc/edit?mainMenu=#(x.mainMenu)&subMenu=#(x.subMenu)">修改</a>
+						<span onclick="confirmAjaxAction('确定删除 doc《#escape(x.title)》？ 删除后无法恢复！', '/admin/doc/delete?mainMenu=#(x.mainMenu)&subMenu=#(x.subMenu)')">删除</span>
+					</div>
+				</li>
+				#for(y : x.subDocList)
+					<li style="padding: 5px 0 5px 25px" class="doc-list">
+						<h3 class="jf-my-article-title">
+							<a href="/doc/#(y.mainMenu)-#(y.subMenu)" target="_blank">
+								#(y.mainMenu).#(y.subMenu)、#(y.title)
+							</a>
+						</h3>
+						<div class="jf-my-article-operation">
+							<a href="/admin/doc/edit?mainMenu=#(y.mainMenu)&subMenu=#(y.subMenu)">修改</a>
+							<span onclick="confirmAjaxAction('确定删除 doc《#escape(y.title)》？ 删除后无法恢复！', '/admin/doc/delete?mainMenu=#(y.mainMenu)&subMenu=#(y.subMenu)')">删除</span>
+						</div>
+					</li>
+				#end
+			#end
+		</ul>
+
+	</div>
+
+</div>
+#end
+
+#define css()
+	<link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-my-space-v1.0.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/jfinal-com-admin-v1.0.css">
+	<link rel="stylesheet" type="text/css" href="/assets/fancyBox/jquery.fancybox.css" media="screen" />
+#end
+
+#define js()
+	<script type="text/javascript" src="/assets/jquery_form/jquery.form.min.js"></script>
+	<script type="text/javascript" src="/assets/layer/layer/layer.js"></script>
+	<script type="text/javascript" src="/assets/js/jfinal-com-admin-v1.0.js"></script>
+	<script type="text/javascript" src="/assets/fancyBox/jquery.fancybox.pack.js"></script>
+
+	<script type="text/javascript">
+	</script>
+#end

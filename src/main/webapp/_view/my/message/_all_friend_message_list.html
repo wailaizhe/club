@@ -1,0 +1,32 @@
+<div class="newsfeed-list-box">
+	<ul class="newsfeed-list">
+		#for(x : messagePage.list)
+			<li>
+				<div class="newsfeed-user-img">
+					<a href="/user/#(x.friend)">
+						<img src="/upload/avatar/#(x.avatar)" />
+					</a>
+				</div>
+				<div class="newsfeed-item">
+					<div class="newsfeed-user-name">
+						<a href="/user/#(x.friend)">#(x.nickName)</a>
+					</div>
+                    <div class="newsfeed-text">
+                        #(x.content)
+                    </div>
+                    <div class="newsfeed-icon">
+                        <span class="newsfeed-time">
+                            #date(x.createAt, "MM-dd HH:mm")
+                        </span>
+                        <a class="reply" href="/my/message/friend/#(x.friend)" style="margin-left:20px;">查看私信(#(x.msgCount))</a>
+                        <a class="reply" href="/my/message/friend/#(x.friend)" style="margin-left:20px;">发送私信</a>
+                        <a class="reply" href="javascript:void(0);" onclick="deleteByFriendId(this, #(x.friend));">删除</a>
+                    </div>
+				</div>
+			</li>
+		#end
+	</ul>
+
+	<!-- 包含分页组件 -->
+	#@paginate(messagePage.pageNumber, messagePage.totalPage, "/my/message?p=")
+</div>
